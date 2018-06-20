@@ -1,2 +1,2 @@
 # Code-Mash
-Tinder for code
+"Would you rather" game but for code
