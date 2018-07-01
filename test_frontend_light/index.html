@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Code Mash</title>
+		
+		<!-- Load React. -->
+		<!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+		<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+		<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+		<!-- Adds JSX and ES6. -->
+		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+		<!-- The script containing all the React components. -->
+		<script type="text/babel" src="elements.js"></script>
+		
+		<link href="index.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+
+		<h2>Code Mash: Cat Comparison Edition</h2>
+
+		<!-- We will put our React component inside this div. -->
+		<div id="code_block"></div>
+
+	</body>
+</html>

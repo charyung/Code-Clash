@@ -1,0 +1,12 @@
+.block
+{
+	border: solid;
+	border-radius: 5px;
+	width: 30%;
+	height: auto;
+}
+
+.block:hover
+{
+	border-color: red;
+}
