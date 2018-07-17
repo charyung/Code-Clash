@@ -1,0 +1,20 @@
+#contentWrapper
+{
+	text-align: center;
+}
+
+#loginForm
+{
+	display: inline-block;
+	border: solid;
+	border-width: 1px;
+	border-radius: 5px;
+	padding: 3%;
+}
+
+#loginForm *
+{
+	display: block;
+	margin: 1%;
+	padding: 2%;
+}

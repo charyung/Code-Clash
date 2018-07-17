@@ -39,7 +39,7 @@ class CodeBlock extends React.Component
 		//return (<code className="block" onClick={() => this.click()} style={this.state.s}> hello aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </code>);
 		
 		//We need some kind of codeblock here. I found syntaxhighlighter, but figure that out later.
-		return (<textarea className={this.props.class} style={this.state.s} value="lskajdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" onClick={this.props.click} readOnly />)
+		return (<textarea className={this.props.class} style={this.state.s} value={this.props.code} onClick={this.props.click} readOnly />)
 	}
 }
 
@@ -84,13 +84,13 @@ class UI extends React.Component
         super(props);
         this.state = {};
 		
-		this.setBlockRef = this.setBlockRef.bind(this);
+		this.setBlockWrapper = this.setBlockWrapper.bind(this);
 		
 		this.openOverlay = this.openOverlay.bind(this);
         this.closeOverlay = this.closeOverlay.bind(this);
     }
 	
-	//These two functions makes it so whenever you click anywhere in the whole page, the overlay closes.
+	//These two functions makes it so whenever you click anywhere (that isn't the box in the middle) in the whole page, the overlay closes.
 	componentDidMount()
 	{
         document.addEventListener("click", this.closeOverlay);
@@ -101,28 +101,34 @@ class UI extends React.Component
         document.removeEventListener("click", this.closeOverlay);
     }
 
-    openOverlay()
+    openOverlay(e)
 	{
-        const style =  null ;
-        this.setState({ style });
+		//console.log(e.target.value);
+		//this.state.blockValue = e.target.value;
+		//console.log("bv: " + this.state.blockValue);
+		
+        const style = null;
+        this.setState({ style: style, blockValue: e.target.value });
+		console.log(this.state);
         //document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
         document.addEventListener("click", this.closeOverlay);
     }
 
     closeOverlay(e) 
 	{
-		if (!this.blockRef.contains(e.target))
+		//e.target is DOM element that was clicked.
+		//If the clicked element isn't a child of the element associated with blockWrapperNode (the only item with this property is the square in the middle), then close the box.
+		if (!this.blockWrapperNode.contains(e.target))
 		{
-			console.log("hi");
 			document.removeEventListener("click", this.closeOverlay);
 			const style = { display: "none" };
 			this.setState({ style });
 		}
     }
 	
-	setBlockRef(domNode)
+	setBlockWrapper(domNode)
 	{
-		this.blockRef = domNode;
+		this.blockWrapperNode = domNode;
 	}
 	
 	render()
@@ -130,11 +136,11 @@ class UI extends React.Component
 		return (
 			<div align="center">
 				<div className="overlay" style={this.state.style}>
-					<div ref={this.setBlockRef} style={{height: 0}}>
-						<CodeBlock class="overlayBlock" />
+					<div ref={this.setBlockWrapper} style={{height: 0}}>
+						<CodeBlock class="overlayBlock" code={this.state.blockValue}/>
 					</div>
 				</div>
-				<CodeBlock id="block1" loc="catpic1.png" class="block" click={this.openOverlay}/> <CodeBlock id="block2" loc="catpic2.png" class="block" click={this.openOverlay}/>
+				<CodeBlock id="block1" class="block" code="aaaa" click={this.openOverlay} /> <CodeBlock id="block2" class="block" code="bbbb" click={this.openOverlay}/>
 				<br />
 				<div align="center" style={{position: "relative"}}>
 					<button> &lt; </button> Vote! <button> &gt; </button>

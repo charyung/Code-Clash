@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>Code Mash</title>
+		<title>Code Mash - Log In</title>
 		
 		<!-- Load React. -->
 		<!-- Note: when deploying, replace "development.js" with "production.min.js". -->
@@ -20,20 +20,28 @@
 		<!-- The nice font. -->
 		<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"> 
 		
-		<!-- The CSS files. -->
+		<!-- The CSS file. -->
 		<link href="index.css" rel="stylesheet" type="text/css">
-		<link href="blocksPage.css" rel="stylesheet" type="text/css">
+		<link href="signIn.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<!--<div id="header"></div>-->
 		<div class="headerWrapper">
 			<div class="headerClass">
 				<h1> Code Mash </h1>
-				<a href="signIn.html"> Sign In </a>
 			</div>
 		</div>
 
-		<!-- We will put our React component inside this div. -->
-		<div id="code_block"></div>
+		<div id="contentWrapper">
+			<div id="loginForm" align="center">
+				<label for="user"> Username: </label>
+				<input id="user" name="user" required />
+				<label for="pw"> Password: </label>
+				<input id="pw" name="pw" type="password" required />
+				<br/>
+				<button name="submit" type="submit" value="submit"> Log in </button>
+			</div>
+				<p> Don't have an account? Sign up <a href="register.html"> here</a>! </p>
+		<div>
 	</body>
 </html>

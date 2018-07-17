@@ -1,48 +1,32 @@
-.block
+html
 {
-	border: solid;
-	border-radius: 5px;
-	padding: 3%;
-	width: 50vh;
-	height: 50vh;
+	font-family: 'PT Sans', sans-serif;
 }
 
-.block:hover
-{
-	border-color: red;
-}
-
-.overlay
-{
-    position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-    height: 100vh;
-    width: 100vw;
-    background: rgba(0, 0, 0, 0.5);
-	z-index: 1000;
-}
-
-.overlayBlock
-{
-	border: solid;
-	border-radius: 5px;
-	padding: 3%;
-	width: 70vh;
-	height: 70vh;
-	color: blue;
-}
-
-.headerClass
+.headerWrapper > .headerClass
 {
 	top: 0px;
 	left: 0px;
 	margin: 0px;
-	margin-bottom: 3%;
-	height: 10%;
-	width: 100%;
-	background-color: rgba(0, 0, 0, 1);
+	margin-bottom: 2%;
+	padding: 1% 1%;
+	width: 98%; /*98% to account for the 1% left and right paddings.*/
+	/* With the help of Photoshop, I've picked out a few nice colours:
+  	   - 002aa8 (Dark blue)
+	   - 71aac7 (light blue)
+	 */
+	background-color: #002AA8;
+}
+
+.headerClass > *
+{
 	color: rgba(255, 255, 255, 1);
+	display: inline-block;
+	margin: 0 auto;
+}
+
+.headerClass a
+{
+	float: right;
+	text-decoration: none;
 }
