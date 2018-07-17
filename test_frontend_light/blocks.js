@@ -79,44 +79,62 @@ class UI extends React.Component
 	
 	//Maybe when September rolls around, I'll know what I'm doing.
 	
-	constructor(props) {
+	constructor(props)
+	{
         super(props);
         this.state = {};
 		
-		this.openNav = this.openNav.bind(this);
-        this.closeNav = this.closeNav.bind(this);
+		this.setBlockRef = this.setBlockRef.bind(this);
+		
+		this.openOverlay = this.openOverlay.bind(this);
+        this.closeOverlay = this.closeOverlay.bind(this);
     }
 	
 	//These two functions makes it so whenever you click anywhere in the whole page, the overlay closes.
-	componentDidMount() {
-        document.addEventListener("click", this.closeNav);
+	componentDidMount()
+	{
+        document.addEventListener("click", this.closeOverlay);
     }
 
-    componentWillUnmount() {
-        document.removeEventListener("click", this.closeNav);
+    componentWillUnmount()
+	{
+        document.removeEventListener("click", this.closeOverlay);
     }
 
-    openNav() {
+    openOverlay()
+	{
         const style =  null ;
         this.setState({ style });
         //document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-        document.addEventListener("click", this.closeNav);
+        document.addEventListener("click", this.closeOverlay);
     }
 
-    closeNav() {
-        document.removeEventListener("click", this.closeNav);
-        const style = { display: "none" };
-        this.setState({ style });
+    closeOverlay(e) 
+	{
+		if (!this.blockRef.contains(e.target))
+		{
+			console.log("hi");
+			document.removeEventListener("click", this.closeOverlay);
+			const style = { display: "none" };
+			this.setState({ style });
+		}
     }
+	
+	setBlockRef(domNode)
+	{
+		this.blockRef = domNode;
+	}
 	
 	render()
 	{
 		return (
 			<div align="center">
 				<div className="overlay" style={this.state.style}>
-					<CodeBlock class="overlayBlock"/>
+					<div ref={this.setBlockRef} style={{height: 0}}>
+						<CodeBlock class="overlayBlock" />
+					</div>
 				</div>
-				<CodeBlock id="block1" loc="catpic1.png" class="block" click={this.openNav}/> <CodeBlock id="block2" loc="catpic2.png" class="block" click={this.openNav}/>
+				<CodeBlock id="block1" loc="catpic1.png" class="block" click={this.openOverlay}/> <CodeBlock id="block2" loc="catpic2.png" class="block" click={this.openOverlay}/>
 				<br />
 				<div align="center" style={{position: "relative"}}>
 					<button> &lt; </button> Vote! <button> &gt; </button>
