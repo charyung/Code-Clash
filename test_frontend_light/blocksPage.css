@@ -1,10 +1,13 @@
 .block
 {
+	display: inline-block;
 	border: solid;
 	border-radius: 5px;
 	padding: 3%;
 	width: 40vh;
 	height: 40vh;
+	min-width: 40vh;
+	overflow: auto;
 }
 
 .block:hover
@@ -27,10 +30,13 @@
 
 .overlayBlock
 {
+	position: absolute;
+	top: 10vh;
+	left: calc(50vw - 38vh);
 	border: solid;
 	border-radius: 5px;
-	padding: 3%;
+	padding: 3vh;
 	width: 70vh;
 	height: 70vh;
-	color: blue;
+	background: white;
 }

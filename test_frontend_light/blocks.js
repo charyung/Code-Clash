@@ -11,16 +11,6 @@
 - https://medium.com/@pitipatdop/little-neat-trick-to-capture-click-outside-react-component-5604830beb7f
 - https://www.javascriptstuff.com/component-communication/#3-callback-functions
 */
-/*class Header extends React.Component
-{
-	render()
-	{
-		return (
-			<h1 className="headerClass"> Code Mash: Cat Comparison Edition </h1>
-		)
-	}
-}*/
-
 
 
 class CodeBlock extends React.Component
@@ -29,8 +19,6 @@ class CodeBlock extends React.Component
 	constructor(props)
 	{
 		super(props);
-		//this.s = null;
-		this.state = { s: null };
 	}
 	
 	render()
@@ -39,7 +27,14 @@ class CodeBlock extends React.Component
 		//return (<code className="block" onClick={() => this.click()} style={this.state.s}> hello aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </code>);
 		
 		//We need some kind of codeblock here. I found syntaxhighlighter, but figure that out later.
-		return (<textarea className={this.props.class} style={this.state.s} value={this.props.code} onClick={this.props.click} readOnly />)
+		//return (<pre style={{display: "inline"}} className={this.props.lang}> <code className={this.props.class} style={this.state.s} onClick={this.props.click}> {this.props.code} </code> </pre>)
+		return (
+			<pre style={{display: "inline"}}>
+				<code className={this.props.class} onClick={this.props.click}>
+{this.props.code}
+				</code>
+			</pre>
+		)
 	}
 }
 
@@ -52,18 +47,6 @@ class OverlayCustom extends React.Component
 	render()
 	{
 		return ( <div id="overlay"> </div> );
-	}
-}
-
-class BlockContainer extends React.Component
-{
-	render()
-	{
-		return (
-			<div align="center" style={{position: "relative"}}>
-				<CodeBlock id="block1" ref="b1" loc="catpic1.png" /> <CodeBlock id="block2" loc="catpic2.png" />
-			</div>
-		)
 	}
 }
 
@@ -88,11 +71,15 @@ class UI extends React.Component
 		
 		this.openOverlay = this.openOverlay.bind(this);
         this.closeOverlay = this.closeOverlay.bind(this);
+		
+		var ReactDOMServer = React.__SECRET_DOM_SERVER_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+		console.log(ReactDOMServer);
+		//var test = ReactDOMServer.renderToStaticMarkup(<pre><code className="language-css">{`p { color: red }`}</code></pre>);
     }
 	
 	//These two functions makes it so whenever you click anywhere (that isn't the box in the middle) in the whole page, the overlay closes.
 	componentDidMount()
-	{
+	{	
         document.addEventListener("click", this.closeOverlay);
     }
 
@@ -108,8 +95,9 @@ class UI extends React.Component
 		//console.log("bv: " + this.state.blockValue);
 		
         const style = null;
-        this.setState({ style: style, blockValue: e.target.value });
-		console.log(this.state);
+		//This gets the text of the clicked target directly. I know this breaks abstraction, and it will be fixed soon(tm).
+        this.setState({ style: style, blockValue: e.target.textContent });
+		console.log(e.target);
         //document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
         document.addEventListener("click", this.closeOverlay);
     }
@@ -140,7 +128,8 @@ class UI extends React.Component
 						<CodeBlock class="overlayBlock" code={this.state.blockValue}/>
 					</div>
 				</div>
-				<CodeBlock id="block1" class="block" code="aaaa" click={this.openOverlay} /> <CodeBlock id="block2" class="block" code="bbbb" click={this.openOverlay}/>
+				<CodeBlock class="block language-python" code="import math" click={this.openOverlay} /> <CodeBlock class="block language-python" code="import random" click={this.openOverlay}/>
+				<div dangerouslySetInnerHTML={{__html: '<pre><code className="language-css">{`p { color: red }`}</code></pre>'}}> </div>
 				<br />
 				<div align="center" style={{position: "relative"}}>
 					<button> &lt; </button> Vote! <button> &gt; </button>

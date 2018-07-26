@@ -4,6 +4,9 @@
 		<meta charset="UTF-8" />
 		<title>Code Mash</title>
 		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css">
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.min.js"></script>
+		
 		<!-- Load React. -->
 		<!-- Note: when deploying, replace "development.js" with "production.min.js". -->
 		<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
@@ -12,8 +15,13 @@
 		<script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
 		<!-- Adds JSX and ES6. -->
 		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+		
+		<!-- Prism. This is the syntax highlighter. -->
+		<!--<script src="prism/prism.js"></script>
+		<link href="prism/prism.css" rel="stylesheet" type="text/css">-->
 
 		<!-- The scripts containing all the React components. -->
+		<!--<script type="text/babel" src="header.js"></script>-->
 		<script type="text/babel" src="blocks.js"></script>
 		
 		<!-- The nice font. -->
@@ -21,11 +29,21 @@
 		
 		<!-- The CSS files. -->
 		<link href="index.css" rel="stylesheet" type="text/css">
-		<link href="register.css" rel="stylesheet" type="text/css">
+		<link href="blocksPage.css" rel="stylesheet" type="text/css">
+		
 	</head>
 	<body>
-		<h1> Code Mash. </h1> 
+		<!--<div id="header"></div>-->
+		<div class="headerWrapper">
+			<div class="headerClass">
+				<h1> Code Mash </h1>
+				<a href="signIn.html"> Sign In </a>
+			</div>
+		</div>
+
+		<!-- We will put our React component inside this div. -->
+		<div id="code_block"></div>
 		
-		
+		<pre><code class="language-css">p { color: red }</code></pre>
 	</body>
 </html>

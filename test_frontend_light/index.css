@@ -3,6 +3,7 @@ html
 	font-family: 'PT Sans', sans-serif;
 }
 
+/* Just the "background" of the header. */
 .headerWrapper > .headerClass
 {
 	top: 0px;
@@ -18,8 +19,10 @@ html
 	background-color: #002AA8;
 }
 
+/* The text and content of the header. */
 .headerClass > *
 {
+	font-size: 15pt;
 	color: rgba(255, 255, 255, 1);
 	display: inline-block;
 	margin: 0 auto;
