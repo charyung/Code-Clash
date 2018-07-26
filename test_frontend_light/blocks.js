@@ -129,7 +129,6 @@ class UI extends React.Component
 					</div>
 				</div>
 				<CodeBlock class="block language-python" code="import math" click={this.openOverlay} /> <CodeBlock class="block language-python" code="import random" click={this.openOverlay}/>
-				<div dangerouslySetInnerHTML={{__html: '<pre><code className="language-css">{`p { color: red }`}</code></pre>'}}> </div>
 				<br />
 				<div align="center" style={{position: "relative"}}>
 					<button> &lt; </button> Vote! <button> &gt; </button>
