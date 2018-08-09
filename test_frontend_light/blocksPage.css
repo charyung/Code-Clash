@@ -1,12 +1,16 @@
+/*html
+{
+	background: yellow;
+}*/
+
 .block
 {
 	display: inline-block;
 	border: solid;
 	border-radius: 5px;
 	padding: 3%;
-	width: 40vh;
-	height: 40vh;
-	min-width: 40vh;
+	width: 50vh;
+	height: 50vh;
 	overflow: auto;
 }
 
@@ -30,7 +34,7 @@
 
 .overlayBlock
 {
-	position: absolute;
+	position: fixed;
 	top: 10vh;
 	left: calc(50vw - 38vh);
 	border: solid;
