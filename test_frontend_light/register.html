@@ -15,7 +15,6 @@
 
 		<!-- The scripts containing all the React components. -->
 		<!--<script type="text/babel" src="header.js"></script>-->
-		<script type="text/babel" src="blocks.js"></script>
 		
 		<!-- The nice font. -->
 		<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"> 
@@ -29,9 +28,29 @@
 		<div class="headerWrapper">
 			<div class="headerClass">
 				<h1> Code Mash </h1>
+				<a href="signIn.html"> Sign In </a>
 			</div>
 		</div>
 
+		<div id="contentWrapper">
+			<div id="regisForm">
+				<div class="inFieldName">
+					<input id="fname" name="fname" placeholder="First name" required />
+					<input id="lname" name="lname" placeholder="Last name" required />
+				</div>
+				
+				<div class="inField">
+					<input id="utor" name="utor" placeholder="UTORid" required />
+				
+					<input id="email" name="email" placeholder="Email" required />
+				
+					<input id="pw" name="pw" type="password" placeholder="Password" required />
+				</div>
+				
+				<br/>
+				<button name="submit" type="submit" value="submit"> Sign up </button>
+			</div>
+		<div>
 		
 	</body>
 </html>

@@ -1,0 +1,58 @@
+.block
+{
+	border: solid;
+	border-radius: 5px;
+	border-width: 1.5px;
+	padding: 0.5em;
+	margin: 2% 5%;
+	width: 50vw;
+	overflow: auto;
+}
+
+.blockExpanded
+{
+	border: solid;
+	border-radius: 5px;
+	border-width: 1.5px;
+	padding: 0.5em;
+	margin: 2% 5%;
+	width: 50vw;
+	height: 50vh;
+	overflow: auto;
+}
+
+.codeBlock
+{
+	border: solid;
+	border-radius: 5px;
+	border-width: 1.5px;
+	padding: 0.5em;
+	width: 90%;
+	height: 80%;
+	overflow: auto;
+}
+
+.title
+{
+	color: black;
+	top: 0;
+	font-weight: bold;
+}
+
+.desc
+{
+	margin: 0;
+	color: grey;
+}
+
+#accountInfo
+{
+	float: right;
+	border: solid;
+	border-radius: 5px;
+	border-width: 1px;
+	padding: 0.5em;
+	margin: 0 5%; /*Vertical, horizontal*/
+	width: 30vw;
+	overflow: auto;
+}

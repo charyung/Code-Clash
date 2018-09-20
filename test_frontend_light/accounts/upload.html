@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>Code Mash - Log In</title>
+		<title>Code Mash - Upload Code</title>
 		
 		<!-- Load React. -->
 		<!-- Note: when deploying, replace "development.js" with "production.min.js". -->
@@ -15,34 +15,26 @@
 
 		<!-- The scripts containing all the React components. -->
 		<!--<script type="text/babel" src="header.js"></script>-->
+		<script type="text/babel" src="upload.js"></script>
 		
 		<!-- The nice font. -->
 		<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"> 
 		
-		<!-- The CSS file. -->
-		<link href="index.css" rel="stylesheet" type="text/css">
-		<link href="signIn.css" rel="stylesheet" type="text/css">
+		<!-- The CSS files. -->
+		<link href="../index.css" rel="stylesheet" type="text/css">
+		<link href="upload.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<!--<div id="header"></div>-->
 		<div class="headerWrapper">
 			<div class="headerClass">
 				<h1> Code Mash </h1>
+				<a href="../blocks.html"> Vote </a>
+				<a href="accounts2.html"> Account </a>
 			</div>
 		</div>
 
-		<div id="contentWrapper">
-			<h2> Sign in. </h2>
+		<div id="uploadBlock"/>
 		
-			<div id="loginForm">
-				<div id="inFields">
-					<input id="user" name="user" placeholder="Email" required />
-					<input id="pw" name="pw" type="password" placeholder="Password" required />
-				</div>
-				<br/>
-				<span id="submit"> <button name="submit" type="submit" value="submit"> Log in </button> </span>
-			</div>
-				<p> Don't have an account? Sign up <a href="register.html"> here</a>! </p>
-		<div>
 	</body>
 </html>

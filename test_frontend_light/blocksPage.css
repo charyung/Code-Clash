@@ -39,8 +39,9 @@
 	left: calc(50vw - 38vh);
 	border: solid;
 	border-radius: 5px;
-	padding: 3vh;
+	padding: 3%;
 	width: 70vh;
 	height: 70vh;
 	background: white;
+	overflow: auto;
 }
