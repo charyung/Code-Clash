@@ -99,7 +99,8 @@ while(1):
 	componentDidMount()
 	{	
         document.addEventListener("click", this.closeOverlay);
-		this.highlightSyntax();
+		//PR stands for PrettyPrint, which belongs to code-prettify, the script doing syntax highlighting.
+		PR.prettyPrint();
     }
 
     componentWillUnmount()
@@ -111,20 +112,8 @@ while(1):
 	{
 		if (this.state.open)
 		{
-			this.highlightSyntax();
+			PR.prettyPrint();
 		}
-	}
-	
-	//This code is a modified version of the code from here: https://labs.chiedo.com/blog/using-google-code-prettify-reactjs/
-	//Basically what this does is that it runs prettyPrint().
-	highlightSyntax()
-	{
-		var script = document.createElement('script');
-		script.type = 'text/javascript';
-		script.async = true;
-		
-		script.src = 'prettify/run_prettify.js';
-		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
 	}
 
     openOverlay(e)
@@ -136,17 +125,9 @@ while(1):
 		
         const style = null;
 		//This gets the text of the clicked target directly. I know this breaks abstraction, and it will be fixed soon(tm).
-		//var pp = PR.prettyPrintOne(e.target.parentNode.textContent);
-		//console.log(pp);
         this.setState({ open: true, style: style, blockValue: e.target.parentNode.textContent });
-		//console.log(e.target);
-		//console.log(document.getElementsByTagName('head'));
-		//PR.prettyPrint();
-		//this.setState({ olClass: "overlayBlock prettyprint" });
-		//console.log(this.state.olClass);
-		//this.highlightSyntax();
-        //document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
         document.addEventListener("click", this.closeOverlay);
+		console.log(this.state.open);
     }
 
     closeOverlay(e) 
