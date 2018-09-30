@@ -62,6 +62,12 @@ class UI extends React.Component
 	
 	//Maybe when September rolls around, I'll know what I'm doing.
 	
+	//--------------------------------------------------------------------------------------
+	
+	//Update: It's september.
+	//I learned more about why this has to be like this, but I still barely know anything.
+	//But the upside is that I'm not passing this piece of crap off to anyone yet, so it's still just me looking at this.
+	
 	constructor(props)
 	{
 		const a = `coolCampusClubs = ["utscards", "csec", "esutsc"]
@@ -152,7 +158,7 @@ while(1):
 		{
 			document.removeEventListener("click", this.closeOverlay);
 			const style = { display: "none" };
-			this.setState({ style, olBlock: null });
+			this.setState({ style, olBlock: null, open: false });
 		}
     }
 	
@@ -936,11 +942,11 @@ for s, e, n, d, m, o, r, y in permutations(range(10),8): # go through all possib
 	{
 		return (
 			<div align="center">
-				<div className="overlay" style={this.state.style}>
+				{this.state.open ? <div className="overlay" style={this.state.style}>
 					<div ref={this.setBlockWrapper} style={{height: 0}}>
-						{this.state.open ? <CodeBlock ref={this.overlayRef} class="overlayBlock prettyprint" code={this.state.blockValue}/> : null}
+						 <CodeBlock ref={this.overlayRef} class="overlayBlock prettyprint" code={this.state.blockValue}/>
 					</div>
-				</div>
+				</div> : null}
 				<CodeBlock class="block prettyprint" code={this.state.leftCode} click={this.openOverlay} /> <CodeBlock class="block prettyprint" code={this.state.rightCode} click={this.openOverlay}/>
 				<br />
 				<div style={{position: "relative"}}>
