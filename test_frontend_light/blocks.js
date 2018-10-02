@@ -127,7 +127,6 @@ while(1):
 		//This gets the text of the clicked target directly. I know this breaks abstraction, and it will be fixed soon(tm).
         this.setState({ open: true, style: style, blockValue: e.target.parentNode.textContent });
         document.addEventListener("click", this.closeOverlay);
-		console.log(this.state.open);
     }
 
     closeOverlay(e) 
