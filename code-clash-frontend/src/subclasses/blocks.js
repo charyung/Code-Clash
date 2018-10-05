@@ -1,6 +1,6 @@
 import React from 'react';
 import "./blocks.css";
-// import PR from "../prettify/run_prettify";
+import SyntaxHighlighter from 'react-syntax-highlighter';
 
 /* TODO:
 - Wait for the backend guys to do the db stuff
@@ -13,6 +13,7 @@ import "./blocks.css";
 
 class CodeBlock extends React.Component
 {	
+	
 	render()
 	{
 		//return ( <img className="block" src={this.props.loc} onClick={() => this.click()} style={this.state.s}/> );
@@ -21,9 +22,16 @@ class CodeBlock extends React.Component
 		//We need some kind of codeblock here. I found syntaxhighlighter, but figure that out later.
 		//return (<pre style={{display: "inline"}} className={this.props.lang}> <code className={this.props.class} style={this.state.s} onClick={this.props.click}> {this.props.code} </code> </pre>)
 		return (
-			<pre style={{display: "inline", textAlign: "left"}}>
+			/*<pre style={{display: "inline", textAlign: "left"}}>
 				<code className={this.props.class} onClick={this.props.click}>
 					{this.props.code}
+				</code>
+			</pre>*/
+			<pre style={{display: "inline", textAlign: "left"}}>
+				<code>
+					<SyntaxHighlighter className={this.props.class} onClick={this.props.click} language='javascript'>
+						{this.props.code}
+					</SyntaxHighlighter>
 				</code>
 			</pre>
 		)
@@ -74,7 +82,7 @@ while(1):
 		break`
 		
         super(props);
-        this.state = { olClass: "overlayBlock prettyprint", open: false, leftCode: a, rightCode: b };
+        this.state = { open: false, leftCode: a, rightCode: b };
 		
 		this.setBlockWrapper = this.setBlockWrapper.bind(this);
 		this.overlayRef = React.createRef();
@@ -82,23 +90,13 @@ while(1):
 		this.openOverlay = this.openOverlay.bind(this);
         this.closeOverlay = this.closeOverlay.bind(this);
         this.swapCode = this.swapCode.bind(this);
+		
     }
 	
 	//These two functions makes it so whenever you click anywhere (that isn't the box in the middle) in the whole page, the overlay closes.
 	componentDidMount()
 	{	
         document.addEventListener("click", this.closeOverlay);
-		
-		//This is 100% a temp solution. I'll use another highlighter (maybe) when I get this porting stuff all done.
-		var script = document.createElement('script');
-		script.type = 'text/javascript';
-		script.async = true;
-		
-		
-		script.src = '../prettify/run_prettify.js';
-		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
-		//PR stands for PrettyPrint, which belongs to code-prettify, the script doing syntax highlighting.
-		//PR.prettyPrint();
 		
 		this.setBlockWrapper();
     }
@@ -924,10 +922,10 @@ for s, e, n, d, m, o, r, y in permutations(range(10),8): # go through all possib
 			<div align="center">
 				{this.state.open ? <div className="overlay" style={this.state.style}>
 					<div ref={this.setBlockWrapper} style={{height: 0}}>
-						 <CodeBlock ref={this.overlayRef} class="overlayBlock prettyprint" code={this.state.blockValue}/>
+						 <CodeBlock ref={this.overlayRef} class="overlayBlock" code={this.state.blockValue}/>
 					</div>
 				</div> : null}
-				<CodeBlock class="block prettyprint" code={this.state.leftCode} click={this.openOverlay} /> <CodeBlock class="block prettyprint" code={this.state.rightCode} click={this.openOverlay}/>
+				<CodeBlock class="block" code={this.state.leftCode} click={this.openOverlay} /> <CodeBlock class="block" code={this.state.rightCode} click={this.openOverlay}/>
 				<br />
 				<div style={{position: "relative"}}>
 					<button onClick={this.swapCode}> &lt; </button> Vote! <button onClick={this.swapCode}> &gt; </button>
