@@ -1,0 +1,38 @@
+/*html
+{
+	background: yellow;
+}*/
+.block {
+  display: inline-block;
+  border: solid;
+  border-radius: 5px;
+  padding: 3%;
+  width: 50vh;
+  height: 50vh;
+  overflow: auto; }
+
+.block:hover {
+  border-color: red; }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000; }
+
+.overlayBlock {
+  position: fixed;
+  top: 10vh;
+  left: calc(50vw - 38vh);
+  border: solid;
+  border-radius: 5px;
+  padding: 3%;
+  width: 70vh;
+  height: 70vh;
+  background: white;
+  overflow: auto; }

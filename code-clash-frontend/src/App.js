@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Blocks from './subclasses/blocks';
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 const Header = () => (
-	<Router>
+	<BrowserRouter>
 		<div>
 			<Route exact path="/" component={Home} />
 			<Route path="/about" component={About} />
+			<Route path="/blocks" component={Blocks} />
 			<Route path="/topics" component={Topics} />
 		</div>
-	</Router>
+	</BrowserRouter>
 );
 
 const Home = () => (
@@ -19,6 +21,7 @@ const Home = () => (
 				<h1> Code Clash </h1>
 				<Link to="/about">About</Link>
 				<Link to="/topics">Topics</Link>
+				<Link to="/blocks">Blocks</Link>
 			</div>
 		</div>
         <h2>Home</h2>
