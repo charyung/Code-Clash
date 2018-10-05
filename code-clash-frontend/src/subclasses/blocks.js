@@ -1,7 +1,6 @@
 import React from 'react';
 import "./blocks.css";
 // import PR from "../prettify/run_prettify";
-import SyntaxHighlighter from 'react-syntax-highlighter';
 
 /* TODO:
 - Wait for the backend guys to do the db stuff
@@ -22,12 +21,11 @@ class CodeBlock extends React.Component
 		//We need some kind of codeblock here. I found syntaxhighlighter, but figure that out later.
 		//return (<pre style={{display: "inline"}} className={this.props.lang}> <code className={this.props.class} style={this.state.s} onClick={this.props.click}> {this.props.code} </code> </pre>)
 		return (
-			/*<pre style={{display: "inline", textAlign: "left"}}>
+			<pre style={{display: "inline", textAlign: "left"}}>
 				<code className={this.props.class} onClick={this.props.click}>
 					{this.props.code}
 				</code>
-			</pre>*/
-			<SyntaxHighlighter className={this.props.class} language="javascript">{this.props.code}</SyntaxHighlighter>
+			</pre>
 		)
 	}
 }
@@ -91,6 +89,14 @@ while(1):
 	{	
         document.addEventListener("click", this.closeOverlay);
 		
+		//This is 100% a temp solution. I'll use another highlighter (maybe) when I get this porting stuff all done.
+		var script = document.createElement('script');
+		script.type = 'text/javascript';
+		script.async = true;
+		
+		
+		script.src = '../prettify/run_prettify.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
 		//PR stands for PrettyPrint, which belongs to code-prettify, the script doing syntax highlighting.
 		//PR.prettyPrint();
 		
