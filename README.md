@@ -1,8 +1,7 @@
-# Code-Mash
+# Code-Clash
 "Would you rather" game but for code
 
-We will be using Flask for Back-end implementation and AngularJS for front-end
-
+This is the front end repos. React is used.
 
 
 *Some screenshots of amazing progress*
