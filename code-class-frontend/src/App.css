@@ -1,0 +1,39 @@
+html {
+  font-family: 'PT Sans', sans-serif;
+  color: #333333; }
+
+body {
+  margin: 0; }
+
+/* Just the "background" of the header. */
+.headerWrapper > .headerClass {
+  /*The margin options are for the blocks page.*/
+  top: 0px;
+  left: 0px;
+  margin: 0px;
+  margin-bottom: 2%;
+  padding: 1% 1%;
+  width: 98%;
+  /*98% to account for the 1% left and right paddings.*/
+  /* With the help of Photoshop, I've picked out a few nice colours:
+  	   - 002aa8 (Dark blue)
+	   - 71aac7 (light blue)
+	 */
+  background-color: #002AA8; }
+
+/* The text and content of the header. */
+.headerClass > * {
+  font-size: 15pt;
+  color: white;
+  display: inline-block;
+  margin: 0 auto; }
+
+.headerClass a {
+  float: right;
+  text-decoration: none;
+  padding: 0 10px;
+  /*margin-bottom: 5%;*/ }
+
+.headerClass a:hover {
+  padding-bottom: 1%;
+  border-bottom: solid #71aac7; }
