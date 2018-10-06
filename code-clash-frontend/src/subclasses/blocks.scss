@@ -1,14 +1,10 @@
-/*html
-{
-	background: yellow;
-}*/
+$blockPadding: 3%;
 
 .block
 {
-	display: inline-block;
+	display: inline;
 	border: solid;
-	border-radius: 5px;
-	padding: 3%;
+	padding: $blockPadding;
 	width: 50vh;
 	height: 50vh;
 	overflow: auto;
@@ -38,8 +34,7 @@
 	top: 10vh;
 	left: calc(50vw - 38vh);
 	border: solid;
-	border-radius: 5px;
-	padding: 3%;
+	padding: $blockPadding;
 	width: 70vh;
 	height: 70vh;
 	background: white;

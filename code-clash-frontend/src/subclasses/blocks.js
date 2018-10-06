@@ -29,7 +29,7 @@ class CodeBlock extends React.Component
 			</pre>*/
 			<pre style={{display: "inline", textAlign: "left"}}>
 				<code>
-					<SyntaxHighlighter className={this.props.class} onClick={this.props.click} language='javascript'>
+					<SyntaxHighlighter className={this.props.class} onClick={this.props.click} language='python'>
 						{this.props.code}
 					</SyntaxHighlighter>
 				</code>
@@ -105,14 +105,6 @@ while(1):
 	{
         document.removeEventListener("click", this.closeOverlay);
     }
-	
-	/*componentDidUpdate()
-	{
-		if (this.state.open)
-		{
-			PR.prettyPrint();
-		}
-	}*/
 
     openOverlay(e)
 	{
@@ -926,7 +918,6 @@ for s, e, n, d, m, o, r, y in permutations(range(10),8): # go through all possib
 					</div>
 				</div> : null}
 				<CodeBlock class="block" code={this.state.leftCode} click={this.openOverlay} /> <CodeBlock class="block" code={this.state.rightCode} click={this.openOverlay}/>
-				<br />
 				<div style={{position: "relative"}}>
 					<button onClick={this.swapCode}> &lt; </button> Vote! <button onClick={this.swapCode}> &gt; </button>
 				</div>
@@ -934,21 +925,5 @@ for s, e, n, d, m, o, r, y in permutations(range(10),8): # go through all possib
 		)
 	}
 }
-
-/*class UI extends React.Component
-{
-	render()
-	{
-		return (
-			<div align="center" style={{position: "relative"}}>
-				<CodeBlock id="block1" loc="catpic1.png"/> <CodeBlock id="block2" loc="catpic2.png" />
-				<br />
-				<div align="center" style={{position: "relative"}}>
-					<button> &lt; </button> Vote! <button> &gt; </button>
-				</div>
-			</div>
-		)
-	}
-}*/
 
 export default UI;
