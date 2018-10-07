@@ -1,4 +1,5 @@
 import React from 'react';
+import './register.css';
 
 class RegistrationForm extends React.Component
 {	

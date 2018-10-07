@@ -1,5 +1,6 @@
-'use strict';
-import React, { Component } from 'react';
+import React from 'react';
+import './accounts.css';
+import SyntaxHighlighter from 'react-syntax-highlighter';
 
 class RecordBlock extends React.Component
 {
@@ -27,31 +28,13 @@ class RecordBlock extends React.Component
 		this.setState({codeVisible: false});
 	}
 	
-	highlightSyntax()
-	{
-		var script = document.createElement('script');
-		script.type = 'text/javascript';
-		script.async = true;
-		
-		script.src = '../prettify/run_prettify.js';
-		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
-	}
-	
-	componentDidUpdate()
-	{
-		if (this.state.codeVisible)
-		{
-			this.highlightSyntax();
-		}
-	}
-	
 	render()
 	{
 		return (
 			<div className="block" ref={this.blockRef}>
 				<a className="title"> {this.props.title} </a>
 				<p className="desc"> {this.state.codeVisible ? <span onClick={this.hideCode}>Hide code</span> : <span onClick={this.showCode}>Show code</span> } | {this.props.lang} | {this.props.points} points | Posted on {this.props.date} </p>
-				{this.state.codeVisible ? <pre className="prettyprint codeBlock"><code>{this.props.code}</code></pre> : null}
+				{this.state.codeVisible ? <pre className="codeBlock"><code><SyntaxHighlighter showLineNumbers language="python">{this.props.code}</SyntaxHighlighter></code></pre> : null}
 			</div>
 		)
 	}

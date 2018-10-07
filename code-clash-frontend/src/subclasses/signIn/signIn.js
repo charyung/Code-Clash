@@ -1,4 +1,5 @@
 import React from 'react';
+import './signIn.css';
 
 class SignInForm extends React.Component
 {	
@@ -17,7 +18,7 @@ class SignInForm extends React.Component
 					<br/>
 					<span id="submit"> <button name="submit" type="submit" value="submit"> Log in </button> </span>
 				</div>
-					<p> Don't have an account? Sign up <a href="register.html"> here</a>! </p>
+					<p> Don't have an account? Sign up <a href="register"> here</a>! </p>
 			</div>
 		)
 	}

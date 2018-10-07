@@ -1,0 +1,19 @@
+#contentWrapper {
+  text-align: center; }
+
+#loginForm {
+  display: inline-block;
+  border: solid;
+  border-width: 1px;
+  /*border-radius: 5px;*/
+  padding: 3%;
+  width: 30vw; }
+
+#inFields {
+  display: flex;
+  flex-direction: column; }
+  #inFields input {
+    margin: 2%;
+    padding: 2%; }
+  #inFields button {
+    margin: 2%; }
