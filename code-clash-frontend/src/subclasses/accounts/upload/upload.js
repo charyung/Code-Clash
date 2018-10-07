@@ -1,4 +1,4 @@
-'use strict';
+import React from 'react';
 
 class UploadBlock extends React.Component
 {
@@ -78,7 +78,7 @@ class FileList extends React.Component
 	}
 }
 
-class UI extends React.Component
+class UploadUI extends React.Component
 {
 	constructor(props)
 	{
@@ -142,5 +142,4 @@ class UI extends React.Component
 	}
 }
 
-ReactDOM.render(<UI />, document.getElementById('uploadBlock'));
-//ReactDOM.render(<Header />, document.getElementById('header'));
+export default UploadUI;

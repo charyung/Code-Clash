@@ -1,15 +1,35 @@
 import React, { Component } from 'react';
-import './App.css';
-import Blocks from './subclasses/blocks';
 import { BrowserRouter, Route, Link } from "react-router-dom";
+import './App.css';
+import Blocks from './subclasses/blocks.js';
+import RegistrationForm from './subclasses/register.js';
+import SignInForm from './subclasses/signIn.js';
+import Account from './subclasses/accounts/accounts.js';
+import Upload from './subclasses/accounts/upload/upload.js';
 
 const Header = () => (
 	<BrowserRouter>
 		<div>
+			<div>
+				<div className="headerWrapper">
+					<div className="headerClass">
+						<h1> Code Clash </h1>
+						<Link to="/blocks">Blocks</Link>
+						<Link to="/register">Register</Link>
+						<Link to="/signin">Sign In</Link>
+						<Link to="/account">Account</Link>
+						<Link to="/upload">Upload</Link>
+					</div>
+				</div>
+				<h2>Home</h2>
+			</div>
+		
 			<Route exact path="/" component={Home} />
-			<Route path="/about" component={About} />
 			<Route path="/blocks" component={Blocks} />
-			<Route path="/topics" component={Topics} />
+			<Route path="/register" component={RegistrationForm} />
+			<Route path="/signin" component={SignInForm} />
+			<Route path="/account" component={Account} />
+			<Route path="/upload" component={Upload} />
 		</div>
 	</BrowserRouter>
 );

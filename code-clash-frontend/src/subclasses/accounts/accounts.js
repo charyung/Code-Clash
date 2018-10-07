@@ -57,7 +57,7 @@ class RecordBlock extends React.Component
 	}
 }
 
-class UI extends React.Component
+class AccountsUI extends React.Component
 {
 	constructor(props)
 	{
@@ -111,5 +111,4 @@ console.log(output);
 	}
 }
 
-ReactDOM.render(<UI />, document.getElementById('recordBlock'));
-//ReactDOM.render(<Header />, document.getElementById('header'));
+export default AccountsUI;
