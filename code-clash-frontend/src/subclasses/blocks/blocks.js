@@ -84,7 +84,7 @@ while(1):
         super(props);
         this.state = { open: false, leftCode: a, rightCode: b };
 		
-		this.setBlockWrapper = this.setBlockWrapper.bind(this);
+		this.blockWrapper = React.createRef();
 		this.overlayRef = React.createRef();
 		
 		this.openOverlay = this.openOverlay.bind(this);
@@ -97,8 +97,6 @@ while(1):
 	componentDidMount()
 	{	
         document.addEventListener("click", this.closeOverlay);
-		
-		this.setBlockWrapper();
     }
 
     componentWillUnmount()
@@ -124,18 +122,13 @@ while(1):
 		console.log(this.overlayRef.current);
 		//e.target is DOM element that was clicked.
 		//If the clicked element isn't a child of the element associated with blockWrapperNode (the only item with this property is the square in the middle), then close the box.
-		if (!this.blockWrapperNode.contains(e.target))
+		if (this.blockWrapper.current && !this.blockWrapper.current.contains(e.target))
 		{
 			document.removeEventListener("click", this.closeOverlay);
 			const style = { display: "none" };
 			this.setState({ style, olBlock: null, open: false });
 		}
     }
-	
-	setBlockWrapper(domNode)
-	{
-		this.blockWrapperNode = domNode;
-	}
 	
 	swapCode()
 	{
@@ -913,7 +906,7 @@ for s, e, n, d, m, o, r, y in permutations(range(10),8): # go through all possib
 		return (
 			<div align="center">
 				{this.state.open ? <div className="overlay" style={this.state.style}>
-					<div ref={this.setBlockWrapper} style={{height: 0}}>
+					<div ref={this.blockWrapper} style={{height: 0}}>
 						 <CodeBlock ref={this.overlayRef} class="overlayBlock" code={this.state.blockValue}/>
 					</div>
 				</div> : null}

@@ -42,11 +42,6 @@ class RecordBlock extends React.Component
 
 class AccountsUI extends React.Component
 {
-	constructor(props)
-	{
-        super(props);
-    }
-	
 	render()
 	{
 		const a = `// Initialize a string variable for the output

@@ -35,14 +35,6 @@ const Header = () => (
 
 const Home = () => (
     <div>
-		<div className="headerWrapper">
-			<div className="headerClass">
-				<h1> Code Clash </h1>
-				<Link to="/about">About</Link>
-				<Link to="/topics">Topics</Link>
-				<Link to="/blocks">Blocks</Link>
-			</div>
-		</div>
         <h2>Home</h2>
     </div>
 );
