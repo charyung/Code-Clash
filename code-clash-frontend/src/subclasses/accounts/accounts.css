@@ -1,7 +1,6 @@
-.block {
+.blockA {
   border: solid;
-  border-radius: 5px;
-  border-width: 1.5px;
+  border-width: 1px;
   padding: 0.5em;
   margin: 2% 5%;
   width: 50vw;
@@ -9,14 +8,14 @@
 
 .blockExpanded {
   border: solid;
-  border-radius: 5px;
-  border-width: 1.5px;
+  border-width: 1px;
   padding: 0.5em;
   margin: 2% 5%;
   width: 50vw;
   overflow: auto; }
 
 .codeBlock {
+  font-size: 10pt;
   padding: 0.5em;
   width: 90%;
   height: 80%;
@@ -34,7 +33,6 @@
 #accountInfo {
   float: right;
   border: solid;
-  border-radius: 5px;
   border-width: 1px;
   padding: 0.5em;
   margin: 0 5%;

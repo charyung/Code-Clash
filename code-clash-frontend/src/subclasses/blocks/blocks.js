@@ -1,5 +1,6 @@
 import React from 'react';
 import "./blocks.css";
+import { rainbow } from 'react-syntax-highlighter/styles/hljs';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
 /* TODO:
@@ -27,13 +28,11 @@ class CodeBlock extends React.Component
 					{this.props.code}
 				</code>
 			</pre>*/
-			<pre style={{display: "inline", textAlign: "left"}}>
-				<code>
-					<SyntaxHighlighter className={this.props.class} onClick={this.props.click} language='python'>
-						{this.props.code}
-					</SyntaxHighlighter>
-				</code>
-			</pre>
+			<div style={{display: "inline", textAlign: "left"}}>
+				<SyntaxHighlighter className={this.props.class} onClick={this.props.click} language="python" customStyle={{display: "inline-block"}}>
+					{this.props.code}
+				</SyntaxHighlighter>
+			</div>
 		)
 	}
 }
@@ -113,6 +112,7 @@ while(1):
 		
         const style = null;
 		//This gets the text of the clicked target directly. I know this breaks abstraction, and it will be fixed soon(tm).
+		//Another reason to fix this: When I do line numbers, the numbers appear on the overlay before the code.
         this.setState({ open: true, style: style, blockValue: e.target.parentNode.textContent });
         document.addEventListener("click", this.closeOverlay);
     }
@@ -904,7 +904,7 @@ for s, e, n, d, m, o, r, y in permutations(range(10),8): # go through all possib
 	render()
 	{
 		return (
-			<div align="center">
+			<div style={{textAlign: "center"}}>
 				{this.state.open ? <div className="overlay" style={this.state.style}>
 					<div ref={this.blockWrapper} style={{height: 0}}>
 						 <CodeBlock ref={this.overlayRef} class="overlayBlock" code={this.state.blockValue}/>

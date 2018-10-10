@@ -2,8 +2,9 @@ $blockPadding: 3%;
 
 .block
 {
-	display: inline;
+	font-size: 10pt;
 	border: solid;
+	margin: 0 auto;
 	padding: $blockPadding;
 	width: 50vh;
 	height: 50vh;
@@ -30,6 +31,7 @@ $blockPadding: 3%;
 
 .overlayBlock
 {
+	font-size: 10pt;
 	position: fixed;
 	top: 10vh;
 	left: calc(50vw - 38vh);

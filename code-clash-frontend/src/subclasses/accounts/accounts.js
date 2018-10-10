@@ -24,17 +24,17 @@ class RecordBlock extends React.Component
 	
 	hideCode()
 	{
-		this.blockRef.current.className = "block";
+		this.blockRef.current.className = "blockA";
 		this.setState({codeVisible: false});
 	}
 	
 	render()
 	{
 		return (
-			<div className="block" ref={this.blockRef}>
+			<div className="blockA" ref={this.blockRef}>
 				<a className="title"> {this.props.title} </a>
 				<p className="desc"> {this.state.codeVisible ? <span onClick={this.hideCode}>Hide code</span> : <span onClick={this.showCode}>Show code</span> } | {this.props.lang} | {this.props.points} points | Posted on {this.props.date} </p>
-				{this.state.codeVisible ? <pre className="codeBlock"><code><SyntaxHighlighter showLineNumbers language="python">{this.props.code}</SyntaxHighlighter></code></pre> : null}
+				{this.state.codeVisible ? <pre className="codeBlock"><code><SyntaxHighlighter showLineNumbers language="javascript">{this.props.code}</SyntaxHighlighter></code></pre> : null}
 			</div>
 		)
 	}
