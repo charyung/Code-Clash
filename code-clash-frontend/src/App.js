@@ -5,7 +5,7 @@ import Blocks from './subclasses/blocks/blocks.js';
 import RegistrationForm from './subclasses/register/register.js';
 import SignInForm from './subclasses/signIn/signIn.js';
 import Account from './subclasses/accounts/accounts.js';
-//import Upload from './subclasses/accounts/upload/upload.js';
+import Upload from './subclasses/accounts/upload/upload.js';
 
 const Header = () => (
 	<BrowserRouter>
@@ -18,7 +18,7 @@ const Header = () => (
 						<Link to="/register">Register</Link>
 						<Link to="/signin">Sign In</Link>
 						<Link to="/account">Account</Link>
-						//<Link to="/upload">Upload</Link>
+						<Link to="/upload">Upload</Link>
 					</div>
 				</div>
 			</div>
@@ -28,7 +28,7 @@ const Header = () => (
 			<Route path="/register" component={RegistrationForm} />
 			<Route path="/signin" component={SignInForm} />
 			<Route path="/account" component={Account} />
-			{/*<Route path="/upload" component={Upload} />*/}
+			<Route path="/upload" component={Upload} />
 		</div>
 	</BrowserRouter>
 );

@@ -1,4 +1,5 @@
 import React from 'react';
+import './upload.css';
 
 class UploadBlock extends React.Component
 {
@@ -64,7 +65,7 @@ class FileList extends React.Component
 		
 		for (fileItem in this.props.filesArray)
 		{
-			
+			itemsList.push()
 		}
 	}
 	
@@ -98,17 +99,6 @@ class UploadUI extends React.Component
 	{
 		console.log(e.target.files);
 		this.setState({codeText: e.target.files});
-		
-		/*var script = document.createElement('script');
-		script.type = 'text/javascript';
-		script.async = true;
-		
-		script.src = '../prettify/run_prettify.js';
-		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
-		
-		this.titleField.current.value = this.fileField.current.files[0].name;
-		console.log(this.fileField.current.files);
-		this.langField.current.value = "C";*/
 	}
 	
 	resetField()
@@ -124,7 +114,7 @@ class UploadUI extends React.Component
 			<div>
 				<div align="center">
 					<div id="fileList">
-						{ this.state.fileList ? <FilesList filesArry={this.state.fileList} : null }
+						{ this.state.fileList ? <FilesList filesArry={this.state.fileList}/> : null }
 					</div>
 					<div id="codeBlock">
 						<pre className="prettyprint"><code>{this.state.codeText}</code></pre>
