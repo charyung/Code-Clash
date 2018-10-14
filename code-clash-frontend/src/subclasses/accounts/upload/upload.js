@@ -50,7 +50,7 @@ class UploadBlock extends React.Component
 	- Then we have each file items, which are stateless components. The props that it gets are: Name and onclick handler.
  */
 
-class FileList extends React.Component
+class FilesList extends React.Component
 {
 	constructor(props)
 	{
@@ -61,19 +61,22 @@ class FileList extends React.Component
 	
 	populateFileList()
 	{
-		const itemsList = null;
+		const itemsList = [];
 		
-		for (fileItem in this.props.filesArray)
+		//Don't change this to a for in loop. FileList != array.
+		for (let i = 0; i < this.props.filesArray.length; i++)
 		{
-			itemsList.push()
+			itemsList.push(<div> {this.props.filesArray[i].name} </div>);
 		}
+		
+		return itemsList;
 	}
 	
 	render()
 	{
 		return (
 			<div id="fileList">
-				{ this.populateFileList } 
+				{ this.populateFileList() } 
 			</div>
 		)
 	}
@@ -98,14 +101,12 @@ class UploadUI extends React.Component
 	change(e)
 	{
 		console.log(e.target.files);
-		this.setState({codeText: e.target.files});
+		this.setState({fileList: e.target.files});
 	}
 	
 	resetField()
 	{
 		this.fileField.current.value = "";
-		this.titleField.current.value = "";
-		this.langField.current.value = "";
 	}
 	
 	render()
@@ -113,19 +114,17 @@ class UploadUI extends React.Component
 		return (
 			<div>
 				<div align="center">
-					<div id="fileList">
-						{ this.state.fileList ? <FilesList filesArry={this.state.fileList}/> : null }
+					<div className="uploadBlock">
+						{ this.state.fileList ? <FilesList filesArray={this.state.fileList}/> : null }
 					</div>
-					<div id="codeBlock">
+					<div className="uploadBlock">
 						<pre className="prettyprint"><code>{this.state.codeText}</code></pre>
 					</div>
-					<input type="file" ref={this.fileField} onChange={this.change} multiple/>
-					<br/>
-					Title: <input type="text" ref={this.titleField}/>
-					<br/>
-					Language: <input type="text" ref={this.langField}/>
-					<br/>
-					<button onClick={this.resetField}> Upload </button>
+					
+					<div>
+						<input type="file" ref={this.fileField} onChange={this.change} multiple/>
+						<button onClick={this.resetField}> Upload </button>
+					</div>
 				</div>
 			</div>
 		)
