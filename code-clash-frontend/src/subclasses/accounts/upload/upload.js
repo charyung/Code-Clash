@@ -49,9 +49,24 @@ class UploadBlock extends React.Component
 	- Then we have the FileList class, which is a container for all the individual file items. This same class would keep an array of files.
 	- Then we have each file items, which are stateless components. The props that it gets are: Name and onclick handler.
  */
+ 
+class FileItem extends React.Component
+{
+	render()
+	{
+		return (
+			<div className="fileItem"> 
+				<input style={{width: "50%"}} placeholder={this.props.name} defaultValue={this.props.name}/>
+				<input style={{width: "30%"}} placeholder="Python" defaultValue="Python"/>
+			</div>
+		)
+	}
+}
 
 class FilesList extends React.Component
 {
+	//To do: Append selected files rather than overwrite.
+	
 	constructor(props)
 	{
         super(props);
@@ -62,11 +77,28 @@ class FilesList extends React.Component
 	populateFileList()
 	{
 		const itemsList = [];
+		const fr = new FileReader();
+		let frResult = fr.result;
 		
 		//Don't change this to a for in loop. FileList != array.
 		for (let i = 0; i < this.props.filesArray.length; i++)
 		{
-			itemsList.push(<div> {this.props.filesArray[i].name} </div>);
+			const item = this.props.filesArray[i];
+			
+			//This is the part where the code shows on the right block.
+			//I'll definitely need to make some promises here so let's shelf this for another day.
+			fr.readAsText(item);
+			fr.onloadend = function()
+			{
+				console.log(fr.result);
+			}
+			
+			//So what's the best way to get the language of a code file?
+			//Is it by file extension? But then would I hard code it all?
+			//Or do I use a package for this? But then that seems unnecessarily bloaty.
+			
+			//Solution: Let the user take care of it.
+			itemsList.push(<FileItem name={item.name}/>);
 		}
 		
 		return itemsList;
@@ -114,11 +146,13 @@ class UploadUI extends React.Component
 		return (
 			<div>
 				<div align="center">
-					<div className="uploadBlock">
-						{ this.state.fileList ? <FilesList filesArray={this.state.fileList}/> : null }
-					</div>
-					<div className="uploadBlock">
-						<pre className="prettyprint"><code>{this.state.codeText}</code></pre>
+					<div style={{display: "flex", width: "70vw"}}>
+						<div className="uploadBlock" style={{flex: 1}}>
+							{ this.state.fileList ? <FilesList filesArray={this.state.fileList}/> : null }
+						</div>
+						<div className="uploadBlock" style={{flex: 2}}>
+							<pre className="prettyprint"><code>{this.state.codeText}</code></pre>
+						</div>
 					</div>
 					
 					<div>
