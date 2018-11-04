@@ -77,8 +77,8 @@ class FilesList extends React.Component
 	populateFileList()
 	{
 		const itemsList = [];
-		const fr = new FileReader();
-		let frResult = fr.result;
+		//const fr = new FileReader();
+		//let frResult = fr.result;
 		
 		//Don't change this to a for in loop. FileList != array.
 		for (let i = 0; i < this.props.filesArray.length; i++)
@@ -87,11 +87,11 @@ class FilesList extends React.Component
 			
 			//This is the part where the code shows on the right block.
 			//I'll definitely need to make some promises here so let's shelf this for another day.
-			fr.readAsText(item);
-			fr.onloadend = function()
-			{
-				console.log(fr.result);
-			}
+			//fr.readAsText(item);
+			//fr.onloadend = function()
+			//{
+			//	console.log(fr.result);
+			//}
 			
 			//So what's the best way to get the language of a code file?
 			//Is it by file extension? But then would I hard code it all?

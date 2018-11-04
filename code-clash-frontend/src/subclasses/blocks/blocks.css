@@ -1,6 +1,6 @@
 .block {
   font-size: 10pt;
-  border: solid;
+  border-radius: 5px;
   margin: 0 auto;
   padding: 3%;
   width: 50vh;
@@ -32,3 +32,6 @@
   height: 70vh;
   background: white;
   overflow: auto; }
+
+button {
+  border: 0; }

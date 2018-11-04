@@ -1,9 +1,10 @@
 $blockPadding: 3%;
+$borderRadius: 5px;
 
 .block
 {
 	font-size: 10pt;
-	border: solid;
+	border-radius: $borderRadius;
 	margin: 0 auto;
 	padding: $blockPadding;
 	width: 50vh;
@@ -41,4 +42,9 @@ $blockPadding: 3%;
 	height: 70vh;
 	background: white;
 	overflow: auto;
+}
+
+button
+{
+	border: 0;
 }
