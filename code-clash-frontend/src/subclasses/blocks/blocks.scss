@@ -5,18 +5,18 @@ $borderRadius: 5px;
 {
 	font-size: 10pt;
 	border-radius: $borderRadius;
-	margin: 0 auto;
+	outline: 3px dashed black;
+	margin: 0 1%;
 	padding: $blockPadding;
 	width: 50vh;
 	height: 50vh;
 	overflow: auto;
+	
+	&:active
+	{
+		outline: 5px dashed black;
+	}
 }
-
-.block:hover
-{
-	border-color: red;
-}
-
 .overlay
 {
     position: fixed;
@@ -33,10 +33,10 @@ $borderRadius: 5px;
 .overlayBlock
 {
 	font-size: 10pt;
+	border-radius: $borderRadius;
 	position: fixed;
 	top: 10vh;
 	left: calc(50vw - 38vh);
-	border: solid;
 	padding: $blockPadding;
 	width: 70vh;
 	height: 70vh;

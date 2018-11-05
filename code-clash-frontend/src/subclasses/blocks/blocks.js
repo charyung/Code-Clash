@@ -36,15 +36,6 @@ class CodeBlock extends React.Component
 	}
 }
 
-
-class OverlayCustom extends React.Component
-{
-	render()
-	{
-		return ( <div id="overlay"> </div> );
-	}
-}
-
 class UI extends React.Component
 {
 	//We're using this component to do overlay.
@@ -99,17 +90,9 @@ while(1):
 		console.log("Stop debugging.");
 	}
 
-    openOverlay(e)
+    openOverlay(selectedCode)
 	{
-		console.log(e.target);
-		//this.state.blockValue = e.target.value;
-		//console.log("bv: " + this.state.blockValue);
-		//var prettify = 
-		
-        const style = null;
-		//This gets the text of the clicked target directly. I know this breaks abstraction, and it will be fixed soon(tm).
-		//Another reason to fix this: When I do line numbers, the numbers appear on the overlay before the code.
-        this.setState({ open: true, blockValue: e.target.parentNode.textContent });
+        this.setState({ open: true, blockValue: selectedCode });
         document.addEventListener("click", this.closeOverlay);
     }
 
@@ -153,7 +136,7 @@ while(1):
 		let g = Math.floor(Math.random() * Math.floor(10));
 		let h = Math.floor(Math.random() * Math.floor(10));
 		
-		while (h == g)
+		while (h === g)
 		{
 			h = Math.floor(Math.random() * Math.floor(10));
 		}
@@ -172,7 +155,7 @@ while(1):
 					</div>
 				</div> : null}
 				
-				<CodeBlock class="block" code={this.state.leftCode} click={this.openOverlay} /> <CodeBlock class="block" code={this.state.rightCode} click={this.openOverlay}/>
+				<CodeBlock class="block" code={this.state.leftCode} click={() => this.openOverlay(this.state.leftCode)} /> <CodeBlock class="block" code={this.state.rightCode} click={() => this.openOverlay(this.state.rightCode)}/>
 				<div style={{position: "relative"}}>
 					<div> <button onClick={this.swapCode}> &lt; </button> Vote! <button onClick={this.swapCode}> &gt; </button> </div>
 					<div> <button onClick={this.swapCode}> = </button> </div>

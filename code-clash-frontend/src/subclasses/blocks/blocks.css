@@ -1,14 +1,14 @@
 .block {
   font-size: 10pt;
   border-radius: 5px;
-  margin: 0 auto;
+  outline: 3px dashed black;
+  margin: 0 1%;
   padding: 3%;
   width: 50vh;
   height: 50vh;
   overflow: auto; }
-
-.block:hover {
-  border-color: red; }
+  .block:active {
+    outline: 5px dashed black; }
 
 .overlay {
   position: fixed;
@@ -23,10 +23,10 @@
 
 .overlayBlock {
   font-size: 10pt;
+  border-radius: 5px;
   position: fixed;
   top: 10vh;
   left: calc(50vw - 38vh);
-  border: solid;
   padding: 3%;
   width: 70vh;
   height: 70vh;
