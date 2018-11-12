@@ -87,6 +87,7 @@ class FilesList extends React.Component
 			
 			//This is the part where the code shows on the right block.
 			//I'll definitely need to make some promises here so let's shelf this for another day.
+			
 			//fr.readAsText(item);
 			//fr.onloadend = function()
 			//{
