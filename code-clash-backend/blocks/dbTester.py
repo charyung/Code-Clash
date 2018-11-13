@@ -39,19 +39,26 @@ def getEntries():
     cur.execute("SELECT * FROM ccTable WHERE id = %s", (otherId,))
     otherRow = cur.fetchone()
 
-    print(type(otherRow[2]))
     print(leastVotedRow, otherRow)
+    return (leastVotedRow, otherRow)
 
 def vote(winningRow, losingRow):
     '''(tuple, tuple) -> void
     This function pretty much does what it says. It updates the info for the correct rows.
     '''
-    cur.execute("UDPATE ccTable SET votecount = %s, winCount = %s, winRate = %s WHERE id = %s", winningRow[1] + 1,  winningRow[2] + 1, winningRow[1] + 1 / winningRow[2] + 1, winningRow[0])
-    cur.execute("UDPATE ccTable SET votecount = %s, winCount = %s, winRate = %s WHERE id = %s", losingRow[1] + 1,  losingRow[2], losingRow[1] + 1 / losingRow[2], winningRow[0])
+    cur.execute("UPDATE ccTable SET voteCount = %s, winCount = %s, winRate = %s WHERE id = %s", (winningRow[1] + 1,  winningRow[2] + 1, ((winningRow[2] + 1) / (winningRow[1] + 1)), winningRow[0]))
+    cur.execute("UPDATE ccTable SET voteCount = %s, winCount = %s, winRate = %s WHERE id = %s", (losingRow[1] + 1,  losingRow[2], (losingRow[2] / (losingRow[1] + 1)), losingRow[0]))
+    conn.commit()
 
 #cur.execute("SELECT * FROM t1;")
 #db_version = cur.fetchall()
 #print(db_version)
-getEntries()
+while (True):
+    entries = getEntries()
+    userVote = input("l/r/e\n")
+    if (userVote == "l"):
+        vote(entries[0], entries[1])
+    elif (userVote == "r"):
+        vote(entries[1], entries[0])
 
 #print(["(" + str(random.randint(0, 50)) + ")" for i in range(0, 94)])
