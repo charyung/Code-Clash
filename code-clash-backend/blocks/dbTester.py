@@ -27,7 +27,7 @@ def getEntries():
     lowerWinRateBound = max(0, leastVotedRow[0] - 5)
     upperWinRateBound = min(100, leastVotedRow[0] + 5)
 
-    cur.execute("SELECT * FROM ccTable WHERE winRate >= %s OR winRate <= %s", (lowerWinRateBound, upperWinRateBound))
+    cur.execute("SELECT id FROM ccTable WHERE winRate >= %s OR winRate <= %s", (lowerWinRateBound, upperWinRateBound))
     
     restrictedList = cur.fetchall()
     otherId = random.randint(0, len(restrictedList) - 1)
@@ -35,11 +35,10 @@ def getEntries():
     while (otherId == leastVotedRow[0]):
         otherId = random.randint(0, len(restrictedList) - 1)
 
-    print(otherId)
-    cur.execute("SELECT * FROM ccTable WHERE id = %s", (otherId,))
+    cur.execute("SELECT * FROM ccTable WHERE id = %s", (restrictedList[otherId][0],))
     otherRow = cur.fetchone()
 
-    print(leastVotedRow, otherRow)
+    print(leastVotedRow[3], otherRow[3])
     return (leastVotedRow, otherRow)
 
 def vote(winningRow, losingRow):
