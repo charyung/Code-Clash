@@ -9,7 +9,7 @@ conn = psycopg2.connect("dbname=mydb user=postgres password=abc123")
 cur = conn.cursor()
 
 def getEntries(allList):
-    ''' () -> tuple
+    ''' (list of tuples) -> tuple
     This function gets the 2 entries to compare and returns them.
     '''
 
