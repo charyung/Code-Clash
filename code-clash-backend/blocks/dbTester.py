@@ -62,7 +62,7 @@ def getEntries(allList):
 
 def vote(winningRow, losingRow):
     '''(tuple, tuple) -> void
-    This function pretty much does what it says. It updates the info for the correct rows.
+    This function pretty much does what it says. It updates the info for the given rows.
     '''
     cur.execute("UPDATE ccTable SET voteCount = %s, winCount = %s, winRate = %s WHERE id = %s", (winningRow[1] + 1,  winningRow[2] + 1, ((winningRow[2] + 1) / (winningRow[1] + 1)), winningRow[0]))
     cur.execute("UPDATE ccTable SET voteCount = %s, winCount = %s, winRate = %s WHERE id = %s", (losingRow[1] + 1,  losingRow[2], (losingRow[2] / (losingRow[1] + 1)), losingRow[0]))
