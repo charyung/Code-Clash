@@ -1,7 +1,11 @@
 # Code-Clash
 "Would you rather" game but for code
 
-This is the front end repos. React is used.
+This is now both frontend and backend.
+
+Stack is:
+- Frontend: React
+- Backend: Django, with PostgreSQL for database
 
 
 *Some screenshots of amazing progress*
