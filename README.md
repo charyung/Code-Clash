@@ -7,6 +7,19 @@ Stack is:
 - Frontend: React
 - Backend: Django, with PostgreSQL for database
 
+To do list (I'll move this to Asana soon(tm)):
+- General:
+    - Move routing to backend
+    - Setup Docker?
+- Frontend:
+    - Real, consistent design
+    - Redux maybe
+    - Write a setup guide for new devs
+- Backend:
+    - Implement a better algorithm for randomly getting the codes
+    - Use Jun's authentication thingy to set up logging in with Utorid
+        - Follow instructions [here](https://github.com/junthehacker/Identity-Atheneum#register-your-app)
+
 
 *Some screenshots of amazing progress*
 
