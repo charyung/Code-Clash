@@ -3,11 +3,11 @@
 
 This is now both frontend and backend.
 
-Stack is:
+## Stack
 - Frontend: React
 - Backend: Django, with PostgreSQL for database
 
-To do list (I'll move this to Asana soon(tm)):
+## To do list (I'll move this to Asana soon(tm))
 - General:
     - Move routing to backend
     - Setup Docker?
@@ -20,8 +20,7 @@ To do list (I'll move this to Asana soon(tm)):
     - Use Jun's authentication thingy to set up logging in with Utorid
         - Follow instructions [here](https://github.com/junthehacker/Identity-Atheneum#register-your-app)
 
-
-*Some screenshots of amazing progress*
+## Screenshots
 
 ![](screenshots/pic1.png)
 
