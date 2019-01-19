@@ -23,7 +23,7 @@ class BlockUtils():
         #First, we generate a winrate threshold (number between 0 to 1, inclusive on both ends). Then, we sort by voteCount, getting the rows with the condition that its winrate is within 5% of the generated number. We take the row with the lowest voteCount that in this result. Then we randomly get one from the same restricted table and show the user the two to compare.
         
         blocksCount = Block.objects.count()
-        firstBlock = Block.objects.get(pk=(random.randint(0, blocksCount - 1)))
+        firstBlock = Block.objects.get(pk=(random.randint(1, blocksCount)))
         
         winRateThreshold = firstBlock.winRate
         restrictedList = []
