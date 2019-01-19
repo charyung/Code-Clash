@@ -1,7 +1,18 @@
 #import psycopg2
 import random
 from django.db import models
+from django.db.models import Q
 
+class Block(models.Model):
+	'''
+	The name is perhaps misleading, but I couldn't think of a better one.
+	This is a single piece of code submitted by a person.
+	'''
+	voteCount = models.IntegerField()
+	winCount = models.IntegerField()
+	code = models.TextField()
+	winRate = models.FloatField()
+	
 # Create your models here.
 class BlockUtils():
 	#def getEntries(allList):
@@ -10,6 +21,20 @@ class BlockUtils():
 		'''
 
 		#First, we generate a winrate threshold (number between 0 to 1, inclusive on both ends). Then, we sort by voteCount, getting the rows with the condition that its winrate is within 5% of the generated number. We take the row with the lowest voteCount that in this result. Then we randomly get one from the same restricted table and show the user the two to compare.
+		
+		blocksCount = Block.objects.count()
+		firstBlock = Block.objects.get(pk=(random.randint(0, blocksCount - 1)))
+		
+		winRateThreshold = firstBlock.winRate
+		restrictedList = []
+		winRateScope = 0
+		
+		while (len(restrictedList) < 2):
+			winRateScope += 1
+			lowerWinRateBound = max(0, winRateThreshold - (0.05 * winRateScope))
+			upperWinRateBound = min(1, winRateThreshold + (0.05 * winRateScope))
+			
+			restrictedList = [row["id"] for row in Block.objects.filter(Q(winRate__lte=1) | Q(winRate__gte=0))]
 
 		'''winRateThreshold = allList[random.randint(0, len(allList) - 1)][4]
 		restrictedList = []
@@ -32,13 +57,3 @@ class BlockUtils():
 
 		print(firstRow[3], otherRow[3])
 		return (firstRow, otherRow)'''
-
-class Block(models.Model):
-	'''
-	The name is perhaps misleading, but I couldn't think of a better one.
-	This is a single piece of code submitted by a person.
-	'''
-	voteCount = models.IntegerField()
-	winCount = models.IntegerField()
-	code = models.TextField()
-	winRate = models.PositiveSmallIntegerField()
