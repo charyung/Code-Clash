@@ -1,14 +1,16 @@
 .block {
   font-size: 10pt;
   border-radius: 5px;
-  outline: 3px dashed black;
+  outline: 3px solid black;
   margin: 0 1%;
   padding: 3%;
   width: 50vh;
   height: 50vh;
-  overflow: auto; }
-  .block:active {
-    outline: 5px dashed black; }
+  overflow: auto;
+}
+.block:active {
+  outline: 3px solid grey;
+}
 
 .overlay {
   position: fixed;
@@ -19,7 +21,8 @@
   height: 100vh;
   width: 100vw;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 1000; }
+  z-index: 1000;
+}
 
 .overlayBlock {
   font-size: 10pt;
@@ -31,7 +34,11 @@
   width: 70vh;
   height: 70vh;
   background: white;
-  overflow: auto; }
+  overflow: auto;
+}
 
 button {
-  border: 0; }
+  border: 0;
+}
+
+/*# sourceMappingURL=blocks.css.map */
