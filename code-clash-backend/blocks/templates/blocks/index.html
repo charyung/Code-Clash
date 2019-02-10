@@ -1,5 +1,8 @@
 {% if choices %}
 	{{ choices.0.code }} {{ choices.1.code }}
 	<br>
-	<button> &lt; </button><button> &gt; </button>
+	<form action="{% url 'vote' choices %}" method="post">
+		{% csrf_token %}
+		<button type="submit" value="l"> &lt; </button><button type="submit" value="r"> &gt; </button>
+	</form>
 {% endif %}
