@@ -13,11 +13,11 @@ def index(request):
 def detail(request, block_id):
     return HttpResponse(Block.objects.get(pk=block_id).code)
     
-def vote(request, choices):
+def vote(request):
     try:
         #win = Block.objects.get(pk=request.POST["choice"][0])
         #lose = Block.objects.get(pk=request.POST["choice"][1])
-        votes = Block.objects.get(pk=request.POST["choice"])
+        choices = Block.objects.get(pk=request.POST["choice"])
     except (KeyError, Block.DoesNotExist):
         return render(request, "blocks/index.html", {
             "choices": choices,
@@ -25,4 +25,4 @@ def vote(request, choices):
         })
     else:
 
-        return HttpResponseRedirect(reverse("blocks", args=(choices,)))
+        return Http
