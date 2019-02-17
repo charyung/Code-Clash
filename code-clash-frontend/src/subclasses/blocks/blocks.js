@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import "./blocks.css";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
@@ -111,38 +112,24 @@ while(1):
 	
 	swapCode()
 	{
-		const a = `a`
-
-		const b = `b`
-
-		const c = `c`
-
-		const d = `d`
-
-		const e = `e`
+		axios.post("http://localhost:8000/blocks/vote", {
+			winner: 
+		})
+			.then(response => {
+				console.log(response);
+			})
+			.catch(error => {
+				console.log(error);
+			})
 		
-		const f = `f`
-		
-		const i = `i`
-
-		const j = `j`
-
-		const k = `k`
-
-		const l = `l`
-		
-		const codes = [a, b, c, d, e, f, i, j, k, l];
-		
-		let g = Math.floor(Math.random() * Math.floor(10));
-		let h = Math.floor(Math.random() * Math.floor(10));
-		
-		while (h === g)
-		{
-			h = Math.floor(Math.random() * Math.floor(10));
-		}
-		
-		this.setState({leftCode: codes[g], rightCode: codes[h]});
-	}
+		axios.get("http://localhost:8000/blocks")
+			.then(response => {
+				console.log(response.data);
+				this.setState({leftCode: response.data[0].fields.code, rightCode: response.data[1].fields.code});
+			})
+			.catch(error => {
+				console.log(error);
+			})
 	
 	
 	render()

@@ -1,14 +1,14 @@
 .block {
   font-size: 10pt;
   border-radius: 5px;
-  outline: 3px dashed black;
+  outline: 3px solid black;
   margin: 0 1%;
   padding: 3%;
   width: 50vh;
   height: 50vh;
   overflow: auto; }
   .block:active {
-    outline: 5px dashed black; }
+    outline: 3px solid grey; }
 
 .overlay {
   position: fixed;

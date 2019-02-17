@@ -5,15 +5,20 @@ body
 	font-family: 'Quicksand', sans-serif;
 	color: #333333;
 	margin: 0;
+	
+	button
+	{
+		padding: 0.5em;
+	}
 }
 
 /* Just the "background" of the header. */
 .headerWrapper > .headerClass
 {
 	/*The margin options are for the blocks page.*/
-	top: 0px;
-	left: 0px;
-	margin: 0px;
+	top: 0;
+	left: 0;
+	margin: 0;
 	margin-bottom: 2%;
 	padding: 1% 1%;
 	width: 98%; /*98% to account for the 1% left and right paddings.*/

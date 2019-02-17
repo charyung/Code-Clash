@@ -51,10 +51,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'blocks.apps.BlocksConfig',
+    'corsheaders',
     'users'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -135,6 +138,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# CORS whitelist
+# https://pypi.org/project/django-cors-headers/
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSDidNotSucceed?utm_source=devtools&utm_medium=firefox-cors-errors&utm_campaign=default
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3000' # frontend 
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/

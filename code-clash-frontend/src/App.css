@@ -3,6 +3,8 @@ body {
   font-family: 'Quicksand', sans-serif;
   color: #333333;
   margin: 0; }
+  body button {
+    padding: 0.5em; }
 
 /* Just the "background" of the header. */
 .headerWrapper > .headerClass {

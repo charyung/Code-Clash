@@ -5,7 +5,7 @@ $borderRadius: 5px;
 {
 	font-size: 10pt;
 	border-radius: $borderRadius;
-	outline: 3px dashed black;
+	outline: 3px solid black;
 	margin: 0 1%;
 	padding: $blockPadding;
 	width: 50vh;
@@ -14,9 +14,10 @@ $borderRadius: 5px;
 	
 	&:active
 	{
-		outline: 5px dashed black;
+		outline: 3px solid grey;
 	}
 }
+
 .overlay
 {
     position: fixed;
