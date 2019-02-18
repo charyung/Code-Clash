@@ -3,6 +3,10 @@ import axios from 'axios';
 import "./blocks.css";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
+// For Django because it requires every form to have CSRF token set
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
 /* TODO:
 - Wait for the backend guys to do the db stuff
 - Ask someone how to do overlay, lmao
@@ -57,22 +61,9 @@ class UI extends React.Component
 	
 	constructor(props)
 	{
-		const a = `coolCampusClubs = ["utscards", "csec", "esutsc"]
-print("List of cool clubs on campus: ")
-for (club in coolCampusClubs):
-	print(club);`
-	
-		const b = `coolCampusClubs = ["utscards", "csec", "esutsc"]
-print("List of cool clubs on campus: ")
-while(1):
-	counter = 0
-	try:
-		print(coolCampusClubs[counter])
-	except IndexError:
-		break`
 		
         super(props);
-        this.state = { open: false, leftCode: a, rightCode: b };
+        this.state = { open: false, leftCode: "Loading...", rightCode: "Loading..." };
 		
 		this.blockWrapper = React.createRef();
 		this.overlayRef = React.createRef();
@@ -83,6 +74,12 @@ while(1):
         this.a = this.a.bind(this);
 		
     }
+	
+	async componentDidMount()
+	{
+		let response = await axios.get("http://localhost:8000/blocks");
+		this.setState({leftCode: response.data[0].fields.code, rightCode: response.data[1].fields.code});
+	}
 	
 	a()
 	{
@@ -110,11 +107,12 @@ while(1):
 		}
     }
 	
-	swapCode()
+	swapCode(winner, loser)
 	{
 		axios.post("http://localhost:8000/blocks/vote", {
-			winner: 
-		})
+			winner: winner,
+			loser: loser
+			})
 			.then(response => {
 				console.log(response);
 			})
@@ -130,7 +128,7 @@ while(1):
 			.catch(error => {
 				console.log(error);
 			})
-	
+	}
 	
 	render()
 	{
@@ -144,7 +142,7 @@ while(1):
 				
 				<CodeBlock class="block" code={this.state.leftCode} click={() => this.openOverlay(this.state.leftCode)} /> <CodeBlock class="block" code={this.state.rightCode} click={() => this.openOverlay(this.state.rightCode)}/>
 				<div style={{position: "relative"}}>
-					<div> <button onClick={this.swapCode}> &lt; </button> Vote! <button onClick={this.swapCode}> &gt; </button> </div>
+					<div> <button onClick={() => this.swapCode(this.state.leftCode, this.state.rightCode)}> &lt; </button> Vote! <button onClick={() => this.swapCode(this.state.rightCode, this.state.leftCode)}> &gt; </button> </div>
 					<div> <button onClick={this.swapCode}> = </button> </div>
 				</div>
 			</div>
