@@ -4,8 +4,13 @@ import "./blocks.css";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
 // For Django because it requires every form to have CSRF token set
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.headers.post['xsrfCookieName'] = 'csrftoken';
+axios.defaults.headers.post['xsrfHeaderName'] = 'X-CSRFToken';
+/*axios.defaults.headers.post = {
+	xsrfCookieName: 'csrftoken',
+	xsrfHeaderName: 'X-CSRFToken'
+};*/
+
 
 /* TODO:
 - Wait for the backend guys to do the db stuff
@@ -73,12 +78,21 @@ class UI extends React.Component
         this.swapCode = this.swapCode.bind(this);
         this.a = this.a.bind(this);
 		
+		console.log(axios.defaults.headers.post);
     }
 	
 	async componentDidMount()
 	{
-		let response = await axios.get("http://localhost:8000/blocks");
-		this.setState({leftCode: response.data[0].fields.code, rightCode: response.data[1].fields.code});
+		try
+		{
+			let response = await axios.get("http://localhost:8000/blocks");
+			this.setState({leftCode: response.data[0].fields.code, rightCode: response.data[1].fields.code});
+		}
+		catch (e)
+		{
+			this.setState({leftCode: "", rightCode: ""});
+			console.log(e);
+		}
 	}
 	
 	a()
@@ -109,9 +123,10 @@ class UI extends React.Component
 	
 	swapCode(winner, loser)
 	{
-		axios.post("http://localhost:8000/blocks/vote", {
-			winner: winner,
-			loser: loser
+		axios.post("http://localhost:8000/blocks/vote",
+			{
+				winner: winner,
+				loser: loser
 			})
 			.then(response => {
 				console.log(response);
