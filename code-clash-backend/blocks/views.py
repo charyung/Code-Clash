@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
 from django.core import serializers
+import json
 
 from .models import BlockUtils, Block
 
@@ -16,14 +17,15 @@ def detail(request, block_id):
     return HttpResponse(Block.objects.get(pk=block_id).code)
     
 def vote(request):
-    print(request.body)
     try:
         print("right")
-        print(winner)
-        #win = Block.objects.get(pk=request.POST["choice"][0])
-        #lose = Block.objects.get(pk=request.POST["choice"][1])
+        requestBody = json.loads(request.body)
+        #winner = Block.objects.get(pk=requestBody['winner'])
+        #loser = Block.objects.get(pk=requestBody['loser'])
+        #print(winner)
         #votes = Block.objects.get(pk=request.POST["choice"])
-    except (KeyError, Block.DoesNotExist):
+        BlockUtils.vote(requestBody['winner'], requestBody['loser'])
+    except (KeyError, Block.DoesNotExist, ValueError):
         print("wrong")
         serialized_error = serializers.serialize('json', {
             "choices": choices,

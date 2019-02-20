@@ -89,7 +89,8 @@ class UI extends React.Component
 		try
 		{
 			let response = await axios.get("http://localhost:8000/blocks");
-			this.setState({leftCode: response.data[0].fields, rightCode: response.data[1].fields, leftCodeObject: response.data[0], rightCodeObject: response.data[1]});
+			console.log(response);
+			this.setState({leftCode: response.data[0].fields.code, rightCode: response.data[1].fields.code, leftCodeObject: response.data[0].pk, rightCodeObject: response.data[1].pk});
 		}
 		catch (e)
 		{
@@ -126,6 +127,7 @@ class UI extends React.Component
 	
 	swapCode(winner, loser)
 	{
+		console.log(this.state);
 		axios.post("http://localhost:8000/blocks/vote",
 			{
 				winner: winner,
