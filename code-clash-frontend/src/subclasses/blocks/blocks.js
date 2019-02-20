@@ -4,8 +4,11 @@ import "./blocks.css";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
 // For Django because it requires every form to have CSRF token set
-axios.defaults.headers.post['xsrfCookieName'] = 'csrftoken';
-axios.defaults.headers.post['xsrfHeaderName'] = 'X-CSRFToken';
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
+//axios.defaults.headers.post['xsrfCookieName'] = 'csrftoken';
+//axios.defaults.headers.post['xsrfHeaderName'] = 'X-CSRFToken';
+//axios.defaults.headers.common['x-csrftoken'] = getCookie('csrftoken');
 /*axios.defaults.headers.post = {
 	xsrfCookieName: 'csrftoken',
 	xsrfHeaderName: 'X-CSRFToken'
@@ -78,7 +81,7 @@ class UI extends React.Component
         this.swapCode = this.swapCode.bind(this);
         this.a = this.a.bind(this);
 		
-		console.log(axios.defaults.headers.post);
+		console.log(axios.defaults);
     }
 	
 	async componentDidMount()
@@ -86,7 +89,7 @@ class UI extends React.Component
 		try
 		{
 			let response = await axios.get("http://localhost:8000/blocks");
-			this.setState({leftCode: response.data[0].fields.code, rightCode: response.data[1].fields.code});
+			this.setState({leftCode: response.data[0].fields, rightCode: response.data[1].fields, leftCodeObject: response.data[0], rightCodeObject: response.data[1]});
 		}
 		catch (e)
 		{
@@ -127,7 +130,8 @@ class UI extends React.Component
 			{
 				winner: winner,
 				loser: loser
-			})
+			},
+			{ withCredentials: true })
 			.then(response => {
 				console.log(response);
 			})
@@ -135,14 +139,14 @@ class UI extends React.Component
 				console.log(error);
 			})
 		
-		axios.get("http://localhost:8000/blocks")
+		/*axios.get("http://localhost:8000/blocks")
 			.then(response => {
 				console.log(response.data);
 				this.setState({leftCode: response.data[0].fields.code, rightCode: response.data[1].fields.code});
 			})
 			.catch(error => {
 				console.log(error);
-			})
+			})*/
 	}
 	
 	render()
@@ -157,7 +161,7 @@ class UI extends React.Component
 				
 				<CodeBlock class="block" code={this.state.leftCode} click={() => this.openOverlay(this.state.leftCode)} /> <CodeBlock class="block" code={this.state.rightCode} click={() => this.openOverlay(this.state.rightCode)}/>
 				<div style={{position: "relative"}}>
-					<div> <button onClick={() => this.swapCode(this.state.leftCode, this.state.rightCode)}> &lt; </button> Vote! <button onClick={() => this.swapCode(this.state.rightCode, this.state.leftCode)}> &gt; </button> </div>
+					<div> <button onClick={() => this.swapCode(this.state.leftCodeObject, this.state.rightCodeObject)}> &lt; </button> Vote! <button onClick={() => this.swapCode(this.state.rightCodeObject, this.state.leftCodeObject)}> &gt; </button> </div>
 					<div> <button onClick={this.swapCode}> = </button> </div>
 				</div>
 			</div>

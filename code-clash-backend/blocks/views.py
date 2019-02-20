@@ -10,13 +10,13 @@ def index(request):
     choices = BlockUtils.getEntries()
     serialized_choices = serializers.serialize('json', choices)
     #return render(request, "blocks/index.html", context)
-    print("hello")
     return HttpResponse(serialized_choices, content_type='application/json')
     
 def detail(request, block_id):
     return HttpResponse(Block.objects.get(pk=block_id).code)
     
-def vote(request, winner, loser):
+def vote(request):
+    print(request.body)
     try:
         print("right")
         print(winner)

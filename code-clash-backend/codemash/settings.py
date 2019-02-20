@@ -145,6 +145,8 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:3000' # frontend 
 )
 
+CORS_ALLOW_CREDENTIALS = True;
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
