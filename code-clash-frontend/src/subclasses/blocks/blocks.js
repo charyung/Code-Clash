@@ -127,6 +127,7 @@ class UI extends React.Component
 	
 	swapCode(winner, loser)
 	{
+		console.log("state");
 		console.log(this.state);
 		axios.post("http://localhost:8000/blocks/vote",
 			{
@@ -135,7 +136,9 @@ class UI extends React.Component
 			},
 			{ withCredentials: true })
 			.then(response => {
+				console.log("response");
 				console.log(response);
+				this.setState({leftCode: response.data[0].fields.code, rightCode: response.data[1].fields.code, leftCodeObject: response.data[0].pk, rightCodeObject: response.data[1].pk});
 			})
 			.catch(error => {
 				console.log(error);

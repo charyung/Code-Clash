@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.template import loader
 from django.core import serializers
 import json
@@ -38,4 +39,4 @@ def vote(request):
         #})
     else:
         print("done");
-        return HttpResponseRedirect(reverse("blocks", args=(winner, loser)))
+        return HttpResponseRedirect(reverse("index"))
