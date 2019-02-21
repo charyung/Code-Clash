@@ -71,7 +71,7 @@ class UI extends React.Component
 	{
 		
         super(props);
-        this.state = { open: false, leftCode: "Loading...", rightCode: "Loading..." };
+        this.state = { open: false, leftCode: "", rightCode: "" };
 		
 		this.blockWrapper = React.createRef();
 		this.overlayRef = React.createRef();
@@ -166,7 +166,7 @@ class UI extends React.Component
 				
 				<CodeBlock class="block" code={this.state.leftCode} click={() => this.openOverlay(this.state.leftCode)} /> <CodeBlock class="block" code={this.state.rightCode} click={() => this.openOverlay(this.state.rightCode)}/>
 				<div style={{position: "relative"}}>
-					<div> <button onClick={() => this.swapCode(this.state.leftCodeObject, this.state.rightCodeObject)}> &lt; </button> Vote! <button onClick={() => this.swapCode(this.state.rightCodeObject, this.state.leftCodeObject)}> &gt; </button> </div>
+					<div> <button onClick={() => this.swapCode(this.state.leftCodeObject, this.state.rightCodeObject)} disabled={ this.state.leftCode === "" || this.state.rightCode === "" ? "true" : "" }> &lt; </button> Vote! <button onClick={() => this.swapCode(this.state.rightCodeObject, this.state.leftCodeObject)} disabled={ this.state.leftCode === "" || this.state.rightCode === "" ? "true" : "" }> &gt; </button> </div>
 					<div> <button onClick={this.swapCode}> = </button> </div>
 				</div>
 			</div>
