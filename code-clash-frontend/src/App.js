@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import './App.css';
+
+// Routes
 import Blocks from './subclasses/blocks/blocks.js';
 import RegistrationForm from './subclasses/register/register.js';
 import SignInForm from './subclasses/signIn/signIn.js';

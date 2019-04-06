@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Quicksand");
+* {
+  box-sizing: border-box; }
+
 body {
   font-family: 'Quicksand', sans-serif;
   color: #333333;
@@ -8,14 +11,9 @@ body {
 
 /* Just the "background" of the header. */
 .headerWrapper > .headerClass {
-  /*The margin options are for the blocks page.*/
-  top: 0px;
-  left: 0px;
-  margin: 0px;
-  margin-bottom: 2%;
-  padding: 1% 1%;
-  width: 98%;
-  /*98% to account for the 1% left and right paddings.*/
+  margin: 0 0 1em;
+  padding: 1em;
+  width: 100%;
   /* With the help of Photoshop, I've picked out a few nice colours:
   	   - 002aa8 (Dark blue)
 	   - 71aac7 (light blue)
