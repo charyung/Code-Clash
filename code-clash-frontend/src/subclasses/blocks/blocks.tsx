@@ -1,7 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import axios from 'axios';
 import "./blocks.css";
-import SyntaxHighlighter from 'react-syntax-highlighter';
+
+// Model
+import CodeBlock from "./codeBlock";
 
 // For Django because it requires every form to have CSRF token set
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -16,40 +18,21 @@ axios.defaults.xsrfCookieName = "csrftoken";
 
 
 /* TODO:
-- Wait for the backend guys to do the db stuff
-- Ask someone how to do overlay, lmao
-- Separate things into different files
 - https://medium.com/@pitipatdop/little-neat-trick-to-capture-click-outside-react-component-5604830beb7f
 - https://www.javascriptstuff.com/component-communication/#3-callback-functions
 */
 
-
-class CodeBlock extends React.Component
-{	
-	
-	render()
-	{
-		//return ( <img className="block" src={this.props.loc} onClick={() => this.click()} style={this.state.s}/> );
-		//return (<code className="block" onClick={() => this.click()} style={this.state.s}> hello aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </code>);
-		
-		//We need some kind of codeblock here. I found syntaxhighlighter, but figure that out later.
-		//return (<pre style={{display: "inline"}} className={this.props.lang}> <code className={this.props.class} style={this.state.s} onClick={this.props.click}> {this.props.code} </code> </pre>)
-		return (
-			/*<pre style={{display: "inline", textAlign: "left"}}>
-				<code className={this.props.class} onClick={this.props.click}>
-					{this.props.code}
-				</code>
-			</pre>*/
-			<div style={{display: "inline", textAlign: "left"}}>
-				<SyntaxHighlighter showLineNumbers className={this.props.class} onClick={this.props.click} language="python" customStyle={{display: "inline-block"}}>
-					{this.props.code}
-				</SyntaxHighlighter>
-			</div>
-		)
-	}
+interface BlocksState
+{
+	open: boolean;
+	leftCode: string;
+	rightCode: string;
+	leftCodeBlock: CodeBlock;
+	rightCodeBlock: CodeBlock;
+	blockValue: string;
 }
 
-class UI extends React.Component
+class Blocks extends React.Component<void, BlocksState>
 {
 	//We're using this component to do overlay.
 	//This is kind of a disgusting solution imo.
@@ -66,12 +49,22 @@ class UI extends React.Component
 	//Update: It's september.
 	//I learned more about why this has to be like this, but I still barely know anything.
 	//But the upside is that I'm not passing this piece of crap off to anyone yet, so it's still just me looking at this.
-	
+
+	private readonly blockWrapper = React.createRef<HTMLDivElement>();
+	private readonly overlayRef = React.createRef<CodeBlock>();
+
 	constructor(props)
 	{
 		
         super(props);
-        this.state = { open: false, leftCode: "", rightCode: "" };
+        this.state = {
+        	open: false,
+			leftCode: "",
+			rightCode: "",
+			leftCodeBlock: null,
+			rightCodeBlock: null,
+			blockValue: null
+        };
 		
 		this.blockWrapper = React.createRef();
 		this.overlayRef = React.createRef();
@@ -90,7 +83,7 @@ class UI extends React.Component
 		{
 			let response = await axios.get("http://localhost:8000/blocks");
 			console.log(response);
-			this.setState({leftCode: response.data[0].fields.code, rightCode: response.data[1].fields.code, leftCodeObject: response.data[0].pk, rightCodeObject: response.data[1].pk});
+			this.setState({leftCode: response.data[0].fields.code, rightCode: response.data[1].fields.code, leftCodeBlock: response.data[0].pk, rightCodeBlock: response.data[1].pk});
 		}
 		catch (e)
 		{
@@ -106,13 +99,13 @@ class UI extends React.Component
 		console.log("Stop debugging.");
 	}
 
-    openOverlay(selectedCode)
+    openOverlay(selectedCode): void
 	{
         this.setState({ open: true, blockValue: selectedCode });
         document.addEventListener("click", this.closeOverlay);
     }
 
-    closeOverlay(e) 
+    closeOverlay(e): void
 	{
 		//console.log(this.overlayRef.current);
 		//e.target is DOM element that was clicked.
@@ -125,7 +118,7 @@ class UI extends React.Component
 		}
     }
 	
-	swapCode(winner, loser)
+	swapCode(winner, loser): void
 	{
 		console.log("state");
 		console.log(this.state);
@@ -138,7 +131,7 @@ class UI extends React.Component
 			.then(response => {
 				console.log("response");
 				console.log(response);
-				this.setState({leftCode: response.data[0].fields.code, rightCode: response.data[1].fields.code, leftCodeObject: response.data[0].pk, rightCodeObject: response.data[1].pk});
+				this.setState({leftCode: response.data[0].fields.code, rightCode: response.data[1].fields.code, leftCodeBlock: response.data[0].pk, rightCodeBlock: response.data[1].pk});
 			})
 			.catch(error => {
 				console.log(error);
@@ -158,15 +151,21 @@ class UI extends React.Component
 	{
 		return (
 			<div style={{textAlign: "center"}}>
-				{this.state.open ? <div className="overlay">
-					<div ref={this.blockWrapper}>
-						<CodeBlock ref={this.overlayRef} class="overlayBlock" code={this.state.blockValue}/>
+				{this.state.open ?
+					<div className="overlay">
+						<div ref={this.blockWrapper}>
+							<CodeBlock ref={this.overlayRef} class="overlayBlock" code={this.state.blockValue}/>
+						</div>
 					</div>
-				</div> : null}
+					: null}
 				
 				<CodeBlock class="block" code={this.state.leftCode} click={() => this.openOverlay(this.state.leftCode)} /> <CodeBlock class="block" code={this.state.rightCode} click={() => this.openOverlay(this.state.rightCode)}/>
 				<div style={{position: "relative"}}>
-					<div> <button onClick={() => this.swapCode(this.state.leftCodeObject, this.state.rightCodeObject)} disabled={ this.state.leftCode === "" || this.state.rightCode === "" ? "true" : "" }> &lt; </button> Vote! <button onClick={() => this.swapCode(this.state.rightCodeObject, this.state.leftCodeObject)} disabled={ this.state.leftCode === "" || this.state.rightCode === "" ? "true" : "" }> &gt; </button> </div>
+					<div>
+						<button onClick={() => this.swapCode(this.state.leftCodeBlock, this.state.rightCodeBlock)} disabled={ this.state.leftCode === "" || this.state.rightCode === "" ? "true" : "" }> &lt; </button>
+						Vote!
+						<button onClick={() => this.swapCode(this.state.rightCodeBlock, this.state.leftCodeBlock)} disabled={ this.state.leftCode === "" || this.state.rightCode === "" ? "true" : "" }> &gt; </button>
+					</div>
 					<div> <button onClick={this.swapCode}> = </button> </div>
 				</div>
 			</div>
@@ -174,4 +173,4 @@ class UI extends React.Component
 	}
 }
 
-export default UI;
+export default Blocks;

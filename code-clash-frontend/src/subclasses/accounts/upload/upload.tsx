@@ -1,16 +1,17 @@
-import React from 'react';
+import * as React from 'react';
 import './upload.css';
 
 class UploadBlock extends React.Component
 {
+	private readonly blockRef = React.createRef<HTMLDivElement>();
 
 	constructor(props)
 	{
 		super(props);
 		this.state = {codeVisible: false};
 		
-		this.showCode = this.showCode.bind(this);
-		this.hideCode = this.hideCode.bind(this);
+		//this.showCode = this.showCode.bind(this);
+		//this.hideCode = this.hideCode.bind(this);
 		
 		this.blockRef = React.createRef();
 	}
@@ -49,8 +50,13 @@ class UploadBlock extends React.Component
 	- Then we have the FileList class, which is a container for all the individual file items. This same class would keep an array of files.
 	- Then we have each file items, which are stateless components. The props that it gets are: Name and onclick handler.
  */
- 
-class FileItem extends React.Component
+
+interface FileItemProps
+{
+	name: string;
+}
+
+class FileItem extends React.Component<FileItemProps>
 {
 	render()
 	{
@@ -63,7 +69,12 @@ class FileItem extends React.Component
 	}
 }
 
-class FilesList extends React.Component
+interface FilesListProps
+{
+	filesArray: Array<any>
+}
+
+class FilesList extends React.Component<FilesListProps>
 {
 	//To do: Append selected files rather than overwrite.
 	
@@ -115,8 +126,18 @@ class FilesList extends React.Component
 	}
 }
 
-class UploadUI extends React.Component
+interface UploadState
 {
+	fileList?: Array<any>,
+	codeText: string;
+}
+
+class Upload extends React.Component<void, UploadState>
+{
+	private readonly fileField = React.createRef<HTMLInputElement>();
+	private readonly titleField = React.createRef<HTMLInputElement>();
+	private readonly langField = React.createRef<HTMLInputElement>();
+
 	constructor(props)
 	{
         super(props);
@@ -146,7 +167,7 @@ class UploadUI extends React.Component
 	{
 		return (
 			<div>
-				<div align="center">
+				<div>
 					<div style={{display: "flex", width: "70vw"}}>
 						<div className="uploadBlock" style={{flex: 1}}>
 							{ this.state.fileList ? <FilesList filesArray={this.state.fileList}/> : null }
@@ -166,4 +187,4 @@ class UploadUI extends React.Component
 	}
 }
 
-export default UploadUI;
+export default Upload;

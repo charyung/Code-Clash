@@ -1,9 +1,26 @@
-import React from 'react';
+import * as React from 'react';
 import './accounts.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
-class RecordBlock extends React.Component
+interface RecordBlockProps
 {
+	title: string;
+	code: string;
+	lang: string;
+	points: string;
+	date: string;
+	//points: number,
+	//date: Date
+}
+
+interface RecordBlockState
+{
+	codeVisible: boolean
+}
+
+class RecordBlock extends React.Component<RecordBlockProps, RecordBlockState>
+{
+	private readonly blockRef = React.createRef<HTMLDivElement>();
 
 	constructor(props)
 	{
