@@ -78,9 +78,20 @@ class Blocks extends React.Component<any, BlocksState>
 	{
 		try
 		{
-			let response = await axios.get("http://localhost:8000/blocks");
-			console.log(response);
-			this.setState({leftCode: response.data[0].pk, rightCode: response.data[1].pk});
+			await axios.get("http://localhost:8000/blocks")
+				.then(response => {
+					console.log(response.data);
+					const left = new Code(response.data[0].fields.pk, response.data[0].fields.code, "asdf asdf", "Javascript")
+					const right = new Code(response.data[1].fields.pk, response.data[1].fields.code, "asdf asdf", "Javascript")
+					this.setState({leftCode: left, rightCode: right});
+				})
+				.catch(error => {
+					console.log(error);
+				})
+
+			//const left = new Code(response.data[0])
+
+			//this.setState({leftCode: response.data[0].pk, rightCode: response.data[1].pk});
 		}
 		catch (e)
 		{
@@ -150,7 +161,7 @@ class Blocks extends React.Component<any, BlocksState>
 				{this.state.open ?
 					<div className="overlay">
 						<div ref={this.blockWrapper}>
-							<CodeBlock ref={this.overlayRef} class="overlayBlock" code={this.state.blockValue}/>
+							<CodeBlock ref={this.overlayRef as any} class="overlayBlock" code={this.state.blockValue}/>
 						</div>
 					</div>
 					: null}
