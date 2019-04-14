@@ -21,16 +21,6 @@ class UploadBlock extends React.Component<null, UploadBlockState>
 		this.blockRef = React.createRef();
 	}
 	
-	highlightSyntax()
-	{
-		const script = document.createElement('script');
-		script.type = 'text/javascript';
-		script.async = true;
-		
-		script.src = '../prettify/run_prettify.js';
-		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
-	}
-	
 	componentDidUpdate()
 	{
 		
