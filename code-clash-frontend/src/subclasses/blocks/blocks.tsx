@@ -2,8 +2,9 @@ import * as React from 'react';
 import axios from 'axios';
 import "./blocks.css";
 
-// Model
+// Models
 import CodeBlock from "./codeBlock";
+import Code from "./code";
 
 // For Django because it requires every form to have CSRF token set
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -25,14 +26,12 @@ axios.defaults.xsrfCookieName = "csrftoken";
 interface BlocksState
 {
 	open: boolean;
-	leftCode: string;
-	rightCode: string;
-	leftCodeBlock: CodeBlock;
-	rightCodeBlock: CodeBlock;
+	leftCode: Code;
+	rightCode: Code;
 	blockValue: string;
 }
 
-class Blocks extends React.Component<void, BlocksState>
+class Blocks extends React.Component<any, BlocksState>
 {
 	//We're using this component to do overlay.
 	//This is kind of a disgusting solution imo.
@@ -52,18 +51,16 @@ class Blocks extends React.Component<void, BlocksState>
 
 	private readonly blockWrapper = React.createRef<HTMLDivElement>();
 	private readonly overlayRef = React.createRef<CodeBlock>();
+	private nullBlock = new Code("null", "null", "null");
 
-	constructor(props)
+	constructor(props: any)
 	{
-		
         super(props);
         this.state = {
         	open: false,
-			leftCode: "",
-			rightCode: "",
-			leftCodeBlock: null,
-			rightCodeBlock: null,
-			blockValue: null
+			leftCode: this.nullBlock,
+			rightCode: this.nullBlock,
+			blockValue: ""
         };
 		
 		this.blockWrapper = React.createRef();
@@ -83,12 +80,11 @@ class Blocks extends React.Component<void, BlocksState>
 		{
 			let response = await axios.get("http://localhost:8000/blocks");
 			console.log(response);
-			this.setState({leftCode: response.data[0].fields.code, rightCode: response.data[1].fields.code, leftCodeBlock: response.data[0].pk, rightCodeBlock: response.data[1].pk});
+			this.setState({leftCode: response.data[0].pk, rightCode: response.data[1].pk});
 		}
 		catch (e)
 		{
-			this.setState({leftCode: "", rightCode: ""});
-			console.log(e);
+			console.log("Could not load blocks:", e);
 		}
 	}
 	
@@ -99,18 +95,18 @@ class Blocks extends React.Component<void, BlocksState>
 		console.log("Stop debugging.");
 	}
 
-    openOverlay(selectedCode): void
+    openOverlay(selectedCode: string): void
 	{
         this.setState({ open: true, blockValue: selectedCode });
         document.addEventListener("click", this.closeOverlay);
     }
 
-    closeOverlay(e): void
+    closeOverlay(e: MouseEvent): void
 	{
 		//console.log(this.overlayRef.current);
 		//e.target is DOM element that was clicked.
 		//If the clicked element isn't a child of the element associated with blockWrapperNode (the only item with this property is the square in the middle), then close the box.
-		if (this.blockWrapper.current && !this.blockWrapper.current.contains(e.target))
+		if (this.blockWrapper.current && !this.blockWrapper.current.contains(e.target as Node))
 		{
 			this.a();
 			document.removeEventListener("click", this.closeOverlay);
@@ -118,7 +114,7 @@ class Blocks extends React.Component<void, BlocksState>
 		}
     }
 	
-	swapCode(winner, loser): void
+	swapCode(winner: Code, loser: Code): void
 	{
 		console.log("state");
 		console.log(this.state);
@@ -131,7 +127,7 @@ class Blocks extends React.Component<void, BlocksState>
 			.then(response => {
 				console.log("response");
 				console.log(response);
-				this.setState({leftCode: response.data[0].fields.code, rightCode: response.data[1].fields.code, leftCodeBlock: response.data[0].pk, rightCodeBlock: response.data[1].pk});
+				this.setState({leftCode: response.data[0].pk, rightCode: response.data[1].pk});
 			})
 			.catch(error => {
 				console.log(error);
@@ -159,14 +155,14 @@ class Blocks extends React.Component<void, BlocksState>
 					</div>
 					: null}
 				
-				<CodeBlock class="block" code={this.state.leftCode} click={() => this.openOverlay(this.state.leftCode)} /> <CodeBlock class="block" code={this.state.rightCode} click={() => this.openOverlay(this.state.rightCode)}/>
+				<CodeBlock class="block" code={this.state.leftCode.code} click={() => this.openOverlay(this.state.leftCode.code)} /> <CodeBlock class="block" code={this.state.rightCode.code} click={() => this.openOverlay(this.state.rightCode.code)}/>
 				<div style={{position: "relative"}}>
 					<div>
-						<button onClick={() => this.swapCode(this.state.leftCodeBlock, this.state.rightCodeBlock)} disabled={ this.state.leftCode === "" || this.state.rightCode === "" ? "true" : "" }> &lt; </button>
+						<button onClick={() => this.swapCode(this.state.leftCode, this.state.rightCode)}> &lt; </button>
 						Vote!
-						<button onClick={() => this.swapCode(this.state.rightCodeBlock, this.state.leftCodeBlock)} disabled={ this.state.leftCode === "" || this.state.rightCode === "" ? "true" : "" }> &gt; </button>
+						<button onClick={() => this.swapCode(this.state.rightCode, this.state.leftCode)}> &gt; </button>
 					</div>
-					<div> <button onClick={this.swapCode}> = </button> </div>
+					<div> <button onClick={() => this.swapCode}> = </button> </div>
 				</div>
 			</div>
 		)

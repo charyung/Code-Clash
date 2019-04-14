@@ -1,11 +1,16 @@
 import * as React from 'react';
 import './upload.css';
 
-class UploadBlock extends React.Component
+interface UploadBlockState
+{
+	codeVisible: boolean
+}
+
+class UploadBlock extends React.Component<null, UploadBlockState>
 {
 	private readonly blockRef = React.createRef<HTMLDivElement>();
 
-	constructor(props)
+	constructor(props: any)
 	{
 		super(props);
 		this.state = {codeVisible: false};
@@ -18,7 +23,7 @@ class UploadBlock extends React.Component
 	
 	highlightSyntax()
 	{
-		var script = document.createElement('script');
+		const script = document.createElement('script');
 		script.type = 'text/javascript';
 		script.async = true;
 		
@@ -71,14 +76,14 @@ class FileItem extends React.Component<FileItemProps>
 
 interface FilesListProps
 {
-	filesArray: Array<any>
+	filesArray: FileList
 }
 
 class FilesList extends React.Component<FilesListProps>
 {
 	//To do: Append selected files rather than overwrite.
 	
-	constructor(props)
+	constructor(props: FilesListProps)
 	{
         super(props);
 		
@@ -128,17 +133,17 @@ class FilesList extends React.Component<FilesListProps>
 
 interface UploadState
 {
-	fileList?: Array<any>,
+	fileList?: FileList,
 	codeText: string;
 }
 
-class Upload extends React.Component<void, UploadState>
+class Upload extends React.Component<any, UploadState>
 {
 	private readonly fileField = React.createRef<HTMLInputElement>();
 	private readonly titleField = React.createRef<HTMLInputElement>();
 	private readonly langField = React.createRef<HTMLInputElement>();
 
-	constructor(props)
+	constructor(props: any)
 	{
         super(props);
 		
@@ -152,15 +157,18 @@ class Upload extends React.Component<void, UploadState>
 		this.langField = React.createRef();
     }
 	
-	change(e)
+	change(files: FileList)
 	{
-		console.log(e.target.files);
-		this.setState({fileList: e.target.files});
+		console.log(files);
+		this.setState({fileList: files});
 	}
 	
 	resetField()
 	{
-		this.fileField.current.value = "";
+		if (this.fileField.current)
+		{
+			this.fileField.current.value = "";
+		}
 	}
 	
 	render()
@@ -178,7 +186,7 @@ class Upload extends React.Component<void, UploadState>
 					</div>
 					
 					<div>
-						<input type="file" ref={this.fileField} onChange={this.change} multiple/>
+						<input type="file" ref={this.fileField} onChange={(e) => this.change(e.target.files as FileList)} multiple/>
 						<button onClick={this.resetField}> Upload </button>
 					</div>
 				</div>

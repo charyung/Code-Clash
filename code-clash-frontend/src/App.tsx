@@ -3,11 +3,11 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 import './App.css';
 
 // Routes
-import Blocks from './subclasses/blocks/blocks.js';
-import RegistrationForm from './subclasses/register/register.js';
-import SignInForm from './subclasses/signIn/signIn.js';
-import Account from './subclasses/accounts/accounts.js';
-import Upload from './subclasses/accounts/upload/upload.js';
+import Blocks from './subclasses/blocks/blocks';
+import RegistrationForm from './subclasses/register/register';
+import SignInForm from './subclasses/signIn/signIn';
+import Account from './subclasses/accounts/accounts';
+import Upload from './subclasses/accounts/upload/upload';
 
 const Header = () => (
 	<BrowserRouter>
@@ -41,7 +41,7 @@ const Home = () => (
     </div>
 );
 
-const About = () => (
+/*const About = () => (
 	<div>
 		<div className="headerWrapper">
 			<div className="headerClass">
@@ -89,6 +89,6 @@ const Topic = ({ match }) => (
 	<div>
 		<h3>{match.params.topicId}</h3>
 	</div>
-);
+);*/
 
 export default Header;

@@ -22,7 +22,7 @@ class RecordBlock extends React.Component<RecordBlockProps, RecordBlockState>
 {
 	private readonly blockRef = React.createRef<HTMLDivElement>();
 
-	constructor(props)
+	constructor(props: RecordBlockProps)
 	{
 		super(props);
 		this.state = {codeVisible: false};
@@ -36,12 +36,19 @@ class RecordBlock extends React.Component<RecordBlockProps, RecordBlockState>
 	showCode()
 	{
 		this.setState({codeVisible: true});
-		this.blockRef.current.className = "blockExpanded";
+		if (this.blockRef.current)
+		{
+			this.blockRef.current.className = "blockExpanded";
+		}
+
 	}
 	
 	hideCode()
 	{
-		this.blockRef.current.className = "blockA";
+		if (this.blockRef.current)
+		{
+			this.blockRef.current.className = "blockA";
+		}
 		this.setState({codeVisible: false});
 	}
 	
