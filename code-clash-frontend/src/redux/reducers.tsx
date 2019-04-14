@@ -1,11 +1,15 @@
+// Redux
 import { combineReducers } from 'redux';
+
+// Actions
+import { BlocksTypes } from "./actions/blocks";
 
 const initialState = {
     leftCode: "",
     rightCode: ""
 };
 
-function blocksReducers(state = initialState, action)
+function blocksReducers(state = initialState, action: any)
 {
     switch (action.type)
     {
