@@ -1,13 +1,15 @@
 $blockPadding: 3%;
-$borderRadius: 5px;
+
+.blocks-container
+{
+	text-align: center;
+}
 
 .block
 {
-	font-size: 10pt;
-	border-radius: $borderRadius;
+	text-align: left;
+
 	outline: 3px solid black;
-	margin: 0 1%;
-	padding: $blockPadding;
 	width: 50vh;
 	height: 50vh;
 	overflow: auto;
@@ -20,11 +22,9 @@ $borderRadius: 5px;
 
 .overlay
 {
-    position: fixed;
+    position: absolute;
 	top: 0;
 	left: 0;
-	bottom: 0;
-	right: 0;
     height: 100vh;
     width: 100vw;
     background: rgba(0, 0, 0, 0.5);
@@ -33,19 +33,11 @@ $borderRadius: 5px;
 
 .overlayBlock
 {
-	font-size: 10pt;
-	border-radius: $borderRadius;
-	position: fixed;
+	position: absolute;
 	top: 10vh;
-	left: calc(50vw - 38vh);
-	padding: $blockPadding;
+	left: calc(50% - 35vh);
 	width: 70vh;
 	height: 70vh;
 	background: white;
 	overflow: auto;
-}
-
-button
-{
-	border: 0;
 }

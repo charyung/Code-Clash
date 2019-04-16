@@ -1,44 +1,10 @@
 import * as React from 'react';
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import './App.css';
+import Header from "./subclasses/header/header";
 
-// Routes
-import Blocks from './subclasses/blocks/blocks';
-import RegistrationForm from './subclasses/register/register';
-import SignInForm from './subclasses/signIn/signIn';
-import Account from './subclasses/accounts/accounts';
-import Upload from './subclasses/accounts/upload/upload';
+import './stylesheets/App.css';
 
-const Header = () => (
-	<BrowserRouter>
-		<div>
-			<div>
-				<div className="headerWrapper">
-					<div className="headerClass">
-						<h1> Code Clash </h1>
-						<Link to="/blocks">Blocks</Link>
-						<Link to="/register">Register</Link>
-						<Link to="/signin">Sign In</Link>
-						<Link to="/account">Account</Link>
-						<Link to="/upload">Upload</Link>
-					</div>
-				</div>
-			</div>
-		
-			<Route exact path="/" component={Home} />
-			<Route path="/blocks" component={Blocks} />
-			<Route path="/register" component={RegistrationForm} />
-			<Route path="/signin" component={SignInForm} />
-			<Route path="/account" component={Account} />
-			<Route path="/upload" component={Upload} />
-		</div>
-	</BrowserRouter>
-);
-
-const Home = () => (
-    <div>
-        <h2>Home</h2>
-    </div>
+const App = () => (
+	<Header></Header>
 );
 
 /*const About = () => (
@@ -91,4 +57,4 @@ const Topic = ({ match }) => (
 	</div>
 );*/
 
-export default Header;
+export default App;

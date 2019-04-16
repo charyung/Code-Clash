@@ -20,8 +20,6 @@ interface RecordBlockState
 
 class RecordBlock extends React.Component<RecordBlockProps, RecordBlockState>
 {
-	private readonly blockRef = React.createRef<HTMLDivElement>();
-
 	constructor(props: RecordBlockProps)
 	{
 		super(props);
@@ -29,42 +27,31 @@ class RecordBlock extends React.Component<RecordBlockProps, RecordBlockState>
 		
 		this.showCode = this.showCode.bind(this);
 		this.hideCode = this.hideCode.bind(this);
-		
-		this.blockRef = React.createRef();
 	}
 	
 	showCode()
 	{
 		this.setState({codeVisible: true});
-		if (this.blockRef.current)
-		{
-			this.blockRef.current.className = "blockExpanded";
-		}
-
 	}
 	
 	hideCode()
 	{
-		if (this.blockRef.current)
-		{
-			this.blockRef.current.className = "blockA";
-		}
 		this.setState({codeVisible: false});
 	}
 	
 	render()
 	{
 		return (
-			<div className="blockA" ref={this.blockRef}>
+			<div className="code-record">
 				<a className="title"> {this.props.title} </a>
-				<p className="desc"> {this.state.codeVisible ? <span onClick={this.hideCode}>Hide code</span> : <span onClick={this.showCode}>Show code</span> } | {this.props.lang} | {this.props.points} points | Posted on {this.props.date} </p>
+				<div className="desc"> {this.state.codeVisible ? <span className="toggle-code" onClick={this.hideCode}>Hide code</span> : <span className="toggle-code" onClick={this.showCode}>Show code</span> } | {this.props.lang} | {this.props.points} points | Posted on {this.props.date} </div>
 				{this.state.codeVisible ? <pre className="codeBlock"><code><SyntaxHighlighter showLineNumbers language="javascript">{this.props.code}</SyntaxHighlighter></code></pre> : null}
 			</div>
 		)
 	}
 }
 
-class AccountsUI extends React.Component
+class Account extends React.Component
 {
 	render()
 	{
@@ -99,11 +86,12 @@ console.log(output);
 		
 		return (
 			<div>
-				<div id="accountInfo">
-					<h3 style={{margin: 0}}> Robert'); DROP TABLE students;-- </h3>
+				<div className="account-info">
+					<h3> Robert'); DROP TABLE students;-- </h3>
 					162 points
 				</div>
-				<div>
+
+				<div className="record-blocks">
 					<RecordBlock title="hello world enterprise edition" lang="Javascript" points="15" date="01/09/2018" code={a}/>
 					<RecordBlock title="asdf" lang="Python" points="124" date="23/07/2018" code="b"/>
 					<RecordBlock title="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" lang="Python" points="23" date="01/01/2019" code="c"/>
@@ -113,4 +101,4 @@ console.log(output);
 	}
 }
 
-export default AccountsUI;
+export default Account;

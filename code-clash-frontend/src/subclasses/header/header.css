@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand");
+/* The text and content of the header. */
+.header {
+  font-family: "Quicksand", sans-serif;
+  margin-bottom: 1em;
+  height: 5em;
+  background-color: #002aa8;
+  box-shadow: 0 0.5em rgba(0, 0, 0, 0.1);
+}
+.header * {
+  color: #ffffff;
+}
+.header .header-link {
+  height: 100%;
+  display: inline-table;
+  vertical-align: top;
+  padding: 0 0.5em;
+}
+.header .header-link:hover {
+  background-color: #2c54cd;
+  border-bottom: solid #71aac7;
+}
+.header .header-link:active {
+  background-color: #5a7be0;
+}
+.header .header-link a {
+  text-decoration: none;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+/*# sourceMappingURL=header.css.map */
