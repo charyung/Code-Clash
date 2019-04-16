@@ -1,9 +1,11 @@
 import * as React from 'react';
 import axios from 'axios';
+
+// CSS
 import "./blocks.css";
 
 // Models
-import CodeBlock from "./codeBlock";
+import CodeBlock from "./codeBlock/codeBlock";
 import Code from "./code";
 
 // For Django because it requires every form to have CSRF token set
@@ -142,7 +144,7 @@ class Blocks extends React.Component<any, BlocksState>
 	render()
 	{
 		return (
-			<div style={{textAlign: "center"}}>
+			<div className="blocks-container">
 				{this.state.open ?
 					<div className="overlay">
 						<div ref={this.blockWrapper}>
@@ -150,9 +152,8 @@ class Blocks extends React.Component<any, BlocksState>
 						</div>
 					</div>
 					: null}
-				
 				<CodeBlock class="block" code={this.state.leftCode.code} click={() => this.openOverlay(this.state.leftCode)} /> <CodeBlock class="block" code={this.state.rightCode.code} click={() => this.openOverlay(this.state.rightCode)}/>
-				<div style={{position: "relative"}}>
+				<div>
 					<div>
 						<button onClick={() => this.swapCode(this.state.leftCode, this.state.rightCode)}> &lt; </button>
 						Vote!

@@ -1,0 +1,68 @@
+@import './colours.scss';
+@import url('https://fonts.googleapis.com/css?family=PT+Mono');
+
+@mixin form-style()
+{
+	color: white;
+	background-color: $form-background;
+
+	margin: 0 auto;
+	padding: 1em;
+
+	box-shadow: 0.5em 0.5em rgba(0, 0, 0, 0.25);
+}
+
+*
+{
+	box-sizing: border-box;
+}
+
+body
+{
+	font-family: 'PT Mono', monospace;
+	color: #333333;
+
+	background-color: $background;
+}
+
+button
+{
+	padding: 0.5em;
+	border: none;
+
+	cursor: pointer;
+}
+
+a
+{
+	text-decoration: none;
+	color: $font-link;
+}
+
+form
+{
+	@include form-style();
+}
+
+input[type=text], input[type=password]
+{
+	color: white;
+	background-color: $input-background;
+
+	border: none;
+	border-left: 2px solid white;
+
+	padding: 0.5em;
+	margin: 0.25em;
+
+	&:invalid
+	{
+		box-shadow: none;
+		border-color: $input-invalid;
+	}
+
+	&:focus
+	{
+		border-color: $input-focus;
+	}
+}

@@ -1,31 +1,14 @@
-#contentWrapper
+.login-form
 {
-	text-align: center;
-}
+	width: 50%;
 
-#loginForm
-{
-	display: inline-block;
-	border: solid;
-	border-width: 1px;
-	/*border-radius: 5px;*/
-	padding: 3%;
-	width: 30vw;
-}
-
-#inFields
-{
-	display: flex;
-	flex-direction: column;
-	
 	input
 	{
-		margin: 2%;
-		padding: 2%;
+		width: 100%;
 	}
-	
+
 	button
 	{
-		margin: 2%;
+		margin: 0.25em;
 	}
 }
