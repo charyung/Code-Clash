@@ -1,29 +1,9 @@
-.uploadBlock
+.upload-block
 {
-	border: solid;
-	border-width: 1px;
-	padding: 0.5em;
-	margin: 2%;
-	width: 20vw;
-	height: 50vh;
-	overflow: auto;
-	text-align: left;
+
 }
 
 .fileItem
 {
-	display: flex;
-	justify-content: space-between;
-	padding: 1px;
-	cursor: pointer;
-	
-	input
-	{
-		border: 0px;
-		
-		&:hover
-		{
-			background-color: silver;
-		}
-	}
+
 }
