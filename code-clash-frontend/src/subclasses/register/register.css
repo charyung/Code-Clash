@@ -1,27 +1,11 @@
-#contentWrapper {
-  text-align: center; }
+.regis-form {
+  width: 50%;
+}
+.regis-form input {
+  width: 100%;
+}
+.regis-form button {
+  margin: 0.25em;
+}
 
-#regisForm {
-  display: inline-block;
-  border: solid;
-  border-width: 1px;
-  /*border-radius: 5px;*/
-  padding: 3%;
-  width: 30vw; }
-
-.inField {
-  display: flex;
-  flex-direction: column; }
-  .inField * {
-    flex-grow: 1;
-    margin: 2%;
-    padding: 2%; }
-
-.inFieldName {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly; }
-  .inFieldName * {
-    flex: auto;
-    margin: 2%;
-    padding: 2%; }
+/*# sourceMappingURL=register.css.map */

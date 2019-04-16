@@ -1,19 +1,11 @@
-#contentWrapper {
-  text-align: center; }
+.login-form {
+  width: 50%;
+}
+.login-form input {
+  width: 100%;
+}
+.login-form button {
+  margin: 0.25em;
+}
 
-#loginForm {
-  display: inline-block;
-  border: solid;
-  border-width: 1px;
-  /*border-radius: 5px;*/
-  padding: 3%;
-  width: 30vw; }
-
-#inFields {
-  display: flex;
-  flex-direction: column; }
-  #inFields input {
-    margin: 2%;
-    padding: 2%; }
-  #inFields button {
-    margin: 2%; }
+/*# sourceMappingURL=signIn.css.map */

@@ -1,52 +1,43 @@
-.blockA
+@import '../../stylesheets/colours.scss';
+@import '../../stylesheets/App.scss';
+
+.account-info, .code-record
 {
-	border: solid;
-	border-width: 1px;
-	padding: 0.5em;
-	margin: 2% 5%;
-	width: 50vw;
-	overflow: auto;
+	@include form-style();
+
+	margin: 1em;
+
+	width: 70%;
 }
 
-.blockExpanded
+.code-record
 {
-	border: solid;
-	border-width: 1px;
-	padding: 0.5em;
-	margin: 2% 5%;
-	width: 50vw;
-	overflow: auto;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	.codeBlock
+	{
+		font-size: 10pt;
+		padding: 0.5em;
+		width: 90%;
+		height: 80%;
+		overflow: auto;
+	}
+
+	.title
+	{
+		font-weight: bold;
+	}
+
+	.desc
+	{
+		color: grey;
+
+		.toggle-code
+		{
+			color: white;
+			cursor: pointer;
+		}
+	}
 }
 
-.codeBlock
-{
-	font-size: 10pt;
-	padding: 0.5em;
-	width: 90%;
-	height: 80%;
-	overflow: auto;
-}
-
-.title
-{
-	color: black;
-	top: 0;
-	font-weight: bold;
-}
-
-.desc
-{
-	margin: 0;
-	color: grey;
-}
-
-#accountInfo
-{
-	float: right;
-	border: solid;
-	border-width: 1px;
-	padding: 0.5em;
-	margin: 0 5%; /*Vertical, horizontal*/
-	width: 30vw;
-	overflow: auto;
-}

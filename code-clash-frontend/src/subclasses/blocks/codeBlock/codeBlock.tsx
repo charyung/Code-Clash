@@ -2,7 +2,7 @@ import * as React from "react";
 
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
-import "./blocks.css";
+import "../blocks.css";
 
 interface CodeBlockProps
 {
@@ -28,11 +28,9 @@ class CodeBlock extends React.Component<CodeBlockProps>
                     {this.props.code}
                 </code>
             </pre>*/
-            <div style={{display: "inline", textAlign: "left"}}>
-                <SyntaxHighlighter showLineNumbers className={this.props.class} onClick={this.props.click} language="python" customStyle={{display: "inline-block"}}>
-                    {this.props.code}
-                </SyntaxHighlighter>
-            </div>
+            <SyntaxHighlighter showLineNumbers className={this.props.class} onClick={this.props.click} language="python" customStyle={{display: "inline-block"}}>
+                {this.props.code}
+            </SyntaxHighlighter>
         )
     }
 }
