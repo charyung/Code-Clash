@@ -5,7 +5,7 @@ import * as React from 'react';
 import './upload.css';
 
 // Models
-import FileListDisplay from './fileListDisplay/fileListDisplay';
+import FileListDisplay from './fileListDisplay';
 
 /*
  What I want is a list of files.

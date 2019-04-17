@@ -4,8 +4,8 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 
 // Routes
 import Blocks from '../blocks/blocks';
-import RegistrationForm from '../register/register';
-import SignInForm from '../signIn/signIn';
+import RegistrationForm from '../accounts/register/register';
+import SignInForm from '../accounts/signIn/signIn';
 import Account from '../accounts/accounts';
 import Upload from '../accounts/upload/upload';
 

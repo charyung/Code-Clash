@@ -1,16 +1,51 @@
-.blocks-container {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css?family=PT+Mono");
+* {
+  box-sizing: border-box;
 }
 
-.block {
-  text-align: left;
-  outline: 3px solid black;
-  width: 50vh;
-  height: 50vh;
-  overflow: auto;
+body {
+  font-family: "PT Mono", monospace;
+  color: #333333;
+  background-color: #ebeff2;
 }
-.block:active {
-  outline: 3px solid grey;
+
+button {
+  padding: 0.5em;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: #ed8600;
+}
+
+form {
+  color: white;
+  background-color: #333130;
+  margin: 0 auto;
+  padding: 1em;
+  box-shadow: 0.5em 0.5em rgba(0, 0, 0, 0.25);
+}
+
+input[type=text], input[type=password] {
+  color: white;
+  background-color: #494847;
+  border: none;
+  border-left: 2px solid white;
+  padding: 0.5em;
+  margin: 0.25em;
+}
+input[type=text]:invalid, input[type=password]:invalid {
+  box-shadow: none;
+  border-color: #e80857;
+}
+input[type=text]:focus, input[type=password]:focus {
+  border-color: #08e8e5;
+}
+
+.vote-container {
+  text-align: center;
 }
 
 .overlay {
@@ -23,14 +58,13 @@
   z-index: 1000;
 }
 
-.overlayBlock {
-  position: absolute;
-  top: 10vh;
-  left: calc(50% - 35vh);
-  width: 70vh;
-  height: 70vh;
-  background: white;
-  overflow: auto;
+.vote-options {
+  color: white;
+  background-color: #333130;
+  margin: 0 auto;
+  padding: 1em;
+  box-shadow: 0.5em 0.5em rgba(0, 0, 0, 0.25);
+  width: 10vw;
 }
 
 /*# sourceMappingURL=blocks.css.map */

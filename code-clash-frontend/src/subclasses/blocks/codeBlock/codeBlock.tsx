@@ -2,7 +2,8 @@ import * as React from "react";
 
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
-import "../blocks.css";
+// CSS
+import "./codeBlock.css";
 
 interface CodeBlockProps
 {

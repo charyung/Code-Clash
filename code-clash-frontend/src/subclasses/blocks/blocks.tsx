@@ -144,16 +144,17 @@ class Blocks extends React.Component<any, BlocksState>
 	render()
 	{
 		return (
-			<div className="blocks-container">
+			<div className="vote-container">
 				{this.state.open ?
 					<div className="overlay">
 						<div ref={this.blockWrapper}>
-							<CodeBlock ref={this.overlayRef as any} class="overlayBlock" code={this.blockValue.code}/>
+							<CodeBlock ref={this.overlayRef as any} class="overlay block" code={this.blockValue.code}/>
 						</div>
 					</div>
 					: null}
-				<CodeBlock class="block" code={this.state.leftCode.code} click={() => this.openOverlay(this.state.leftCode)} /> <CodeBlock class="block" code={this.state.rightCode.code} click={() => this.openOverlay(this.state.rightCode)}/>
-				<div>
+				<CodeBlock class="block" code={this.state.leftCode.code} click={() => this.openOverlay(this.state.leftCode)} />
+				<CodeBlock class="block" code={this.state.rightCode.code} click={() => this.openOverlay(this.state.rightCode)}/>
+				<div className="vote-options">
 					<div>
 						<button onClick={() => this.swapCode(this.state.leftCode, this.state.rightCode)}> &lt; </button>
 						Vote!
