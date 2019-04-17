@@ -60,18 +60,20 @@ class Upload extends React.Component<any, UploadState>
 	render()
 	{
 		return (
-			<div>
-				<div>
-					<table className="files-list">
-						<tr>
-							<th>File Name</th>
-							<th>Language</th>
-						</tr>
-						{ this.state.fileList ? <FileListDisplay filesArray={this.state.fileList}/> : null }
-					</table>
-					<div className="upload-block">
-						<pre className="prettyprint"><code>{this.state.codeText}</code></pre>
-					</div>
+			<div className="files-list">
+				<table>
+					<colgroup>
+						<col span={1} style={{width: "70%"}}/>
+						<col span={1} style={{width: "30%"}}/>
+					</colgroup>
+					<tr>
+						<th>File Name</th>
+						<th>Language</th>
+					</tr>
+					{ this.state.fileList ? <FileListDisplay filesArray={this.state.fileList}/> : null }
+				</table>
+				<div className="upload-block">
+					<pre className="prettyprint"><code>{this.state.codeText}</code></pre>
 				</div>
 
 				<div>

@@ -52,9 +52,9 @@ class FileListDisplay extends React.Component<FileListDisplayProps>
     render()
     {
         return (
-            <div className="file-list">
+            <React.Fragment>
                 { this.populateFileList() }
-            </div>
+            </React.Fragment>
         )
     }
 }

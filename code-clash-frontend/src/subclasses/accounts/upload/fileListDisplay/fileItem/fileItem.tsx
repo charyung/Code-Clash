@@ -12,10 +12,10 @@ class FileItem extends React.Component<FileItemProps>
         return (
             <tr className="file-item">
                 <td>
-                    <input style={{width: "50%"}} placeholder={this.props.name} defaultValue={this.props.name}/>
+                    <input type="text" placeholder={this.props.name} defaultValue={this.props.name}/>
                 </td>
                 <td>
-                    <input style={{width: "30%"}} placeholder="Python" defaultValue="Python"/>
+                    <input type="text" placeholder="Python" defaultValue="Python"/>
                 </td>
             </tr>
         )

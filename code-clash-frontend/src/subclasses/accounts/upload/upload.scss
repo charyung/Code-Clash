@@ -1,9 +1,18 @@
-.upload-block
+@import '../../../stylesheets/App.scss';
+
+.files-list
 {
+  @include form-style();
+  width: 50%;
 
-}
+  table
+  {
+    width: 100%;
+    border-collapse: collapse;
 
-.fileItem
-{
-
+    input
+    {
+      width: 100%;
+    }
+  }
 }
