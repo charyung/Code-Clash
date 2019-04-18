@@ -1,0 +1,33 @@
+@import '../../../stylesheets/App.scss';
+
+.block
+{
+  @include form-style();
+
+  text-align: left;
+
+  display: inline-block;
+
+  outline: 3px solid black;
+  width: 50vh;
+  height: 50vh;
+  overflow: auto;
+
+  margin: 1em;
+
+  cursor: pointer;
+
+  &:active
+  {
+    outline: 3px solid grey;
+  }
+
+  &.overlay
+  {
+    position: absolute;
+    top: 10vh;
+    left: calc(50% - 35vh);
+    width: 70vh;
+    height: 70vh;
+  }
+}

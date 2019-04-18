@@ -30,30 +30,15 @@ interface BlocksState
 	open: boolean;
 	leftCode: Code;
 	rightCode: Code;
-	blockValue: string;
 }
 
 class Blocks extends React.Component<any, BlocksState>
 {
-	//We're using this component to do overlay.
-	//This is kind of a disgusting solution imo.
-	//But what can you do.
-	//Brian said that 1st years in future years will continue to work on this code.
-	//I hope to god that nobody who's inexperienced has to see this abomination.
-	//But I'm also inexperienced.
-	//So that's funny.
-	
-	//Maybe when September rolls around, I'll know what I'm doing.
-	
-	//--------------------------------------------------------------------------------------
-	
-	//Update: It's september.
-	//I learned more about why this has to be like this, but I still barely know anything.
-	//But the upside is that I'm not passing this piece of crap off to anyone yet, so it's still just me looking at this.
-
 	private readonly blockWrapper = React.createRef<HTMLDivElement>();
 	private readonly overlayRef = React.createRef<CodeBlock>();
-	private nullBlock = new Code("null", "null", "null");
+	private readonly nullBlock = new Code("null", "null", "null");
+
+	private blockValue: Code = this.nullBlock;
 
 	constructor(props: any)
 	{
@@ -61,8 +46,7 @@ class Blocks extends React.Component<any, BlocksState>
         this.state = {
         	open: false,
 			leftCode: this.nullBlock,
-			rightCode: this.nullBlock,
-			blockValue: ""
+			rightCode: this.nullBlock
         };
 		
 		this.blockWrapper = React.createRef();
@@ -108,9 +92,10 @@ class Blocks extends React.Component<any, BlocksState>
 		console.log("Stop debugging.");
 	}
 
-    openOverlay(selectedCode: string): void
+    openOverlay(selectedCode: Code): void
 	{
-        this.setState({ open: true, blockValue: selectedCode });
+		this.blockValue = selectedCode;
+		this.setState({open: true});
         document.addEventListener("click", this.closeOverlay);
     }
 
@@ -123,7 +108,7 @@ class Blocks extends React.Component<any, BlocksState>
 		{
 			this.a();
 			document.removeEventListener("click", this.closeOverlay);
-			this.setState({ open: false });
+			this.setState({open: false});
 		}
     }
 	
@@ -159,17 +144,17 @@ class Blocks extends React.Component<any, BlocksState>
 	render()
 	{
 		return (
-			<div className="blocks-container">
+			<div className="vote-container">
 				{this.state.open ?
 					<div className="overlay">
 						<div ref={this.blockWrapper}>
-							<CodeBlock ref={this.overlayRef as any} class="overlayBlock" code={this.state.blockValue}/>
+							<CodeBlock ref={this.overlayRef as any} class="overlay block" code={this.blockValue.code}/>
 						</div>
 					</div>
 					: null}
-				
-				<CodeBlock class="block" code={this.state.leftCode.code} click={() => this.openOverlay(this.state.leftCode.code)} /> <CodeBlock class="block" code={this.state.rightCode.code} click={() => this.openOverlay(this.state.rightCode.code)}/>
-				<div>
+				<CodeBlock class="block" code={this.state.leftCode.code} click={() => this.openOverlay(this.state.leftCode)} />
+				<CodeBlock class="block" code={this.state.rightCode.code} click={() => this.openOverlay(this.state.rightCode)}/>
+				<div className="vote-options">
 					<div>
 						<button onClick={() => this.swapCode(this.state.leftCode, this.state.rightCode)}> &lt; </button>
 						Vote!

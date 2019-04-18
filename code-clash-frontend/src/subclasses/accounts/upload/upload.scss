@@ -1,29 +1,18 @@
-.uploadBlock
-{
-	border: solid;
-	border-width: 1px;
-	padding: 0.5em;
-	margin: 2%;
-	width: 20vw;
-	height: 50vh;
-	overflow: auto;
-	text-align: left;
-}
+@import '../../../stylesheets/App.scss';
 
-.fileItem
+.files-list
 {
-	display: flex;
-	justify-content: space-between;
-	padding: 1px;
-	cursor: pointer;
-	
-	input
-	{
-		border: 0px;
-		
-		&:hover
-		{
-			background-color: silver;
-		}
-	}
+  @include form-style();
+  width: 50%;
+
+  table
+  {
+    width: 100%;
+    border-collapse: collapse;
+
+    input
+    {
+      width: 100%;
+    }
+  }
 }

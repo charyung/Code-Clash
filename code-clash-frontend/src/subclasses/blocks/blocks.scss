@@ -1,23 +1,8 @@
-$blockPadding: 3%;
+@import '../../stylesheets/App.scss';
 
-.blocks-container
+.vote-container
 {
 	text-align: center;
-}
-
-.block
-{
-	text-align: left;
-
-	outline: 3px solid black;
-	width: 50vh;
-	height: 50vh;
-	overflow: auto;
-	
-	&:active
-	{
-		outline: 3px solid grey;
-	}
 }
 
 .overlay
@@ -31,13 +16,9 @@ $blockPadding: 3%;
 	z-index: 1000;
 }
 
-.overlayBlock
+.vote-options
 {
-	position: absolute;
-	top: 10vh;
-	left: calc(50% - 35vh);
-	width: 70vh;
-	height: 70vh;
-	background: white;
-	overflow: auto;
+	@include form-style();
+
+	width: 10vw;
 }
