@@ -19,7 +19,6 @@ def detail(request, block_id):
     
 def vote(request):
     try:
-        print("right")
         requestBody = json.loads(request.body)
         #winner = Block.objects.get(pk=requestBody['winner'])
         #loser = Block.objects.get(pk=requestBody['loser'])
@@ -27,7 +26,6 @@ def vote(request):
         #votes = Block.objects.get(pk=request.POST["choice"])
         BlockUtils.vote(requestBody['winner'], requestBody['loser'])
     except (KeyError, Block.DoesNotExist, ValueError):
-        print("wrong")
         serialized_error = serializers.serialize('json', {
             "choices": choices,
             "error_message": "pick a one that exists",
@@ -39,4 +37,17 @@ def vote(request):
         #})
     else:
         print("done");
-        return HttpResponseRedirect(reverse("index"))
+        return HttpResponse()
+
+def create(request):
+    try:
+        requestBody = request.FILES['files']
+        import pdb; pdb.set_trace()
+        print(requestBody.values())
+    except Exception as e:
+        serialized_error = serializers.serialize('json', {
+            "error_message": e,
+        })
+        return HttpResponse(e, content_type='application/json', status_code = 400)
+    else:
+        return HttpResponse()

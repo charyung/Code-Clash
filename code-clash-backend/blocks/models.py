@@ -10,7 +10,7 @@ class Block(models.Model):
     '''
     voteCount = models.IntegerField()
     winCount = models.IntegerField()
-    code = models.TextField()
+    code = models.FileField()
     winRate = models.FloatField()
     
 # Create your models here.
