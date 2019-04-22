@@ -77,3 +77,11 @@ class BlockUtils():
         elif (userVote == "r"):
             BlockUtils.vote(entries[1].id, entries[0].id)
         
+    def createCode(filesList):
+        '''
+        Creates a new code object in the database
+        (???) -> void
+        '''
+        for file in filesList:
+            block = Block.objects.create(0, 0, file, 0)
+            block.save()

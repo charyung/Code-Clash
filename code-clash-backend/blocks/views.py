@@ -41,9 +41,8 @@ def vote(request):
 
 def create(request):
     try:
-        requestBody = request.FILES['files']
-        import pdb; pdb.set_trace()
-        print(requestBody.values())
+        requestBody = request.FILES.getlist('files')
+        BlockUtils.createCode(requestBody);
     except Exception as e:
         serialized_error = serializers.serialize('json', {
             "error_message": e,

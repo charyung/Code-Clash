@@ -122,12 +122,14 @@ class Blocks extends React.Component<any, BlocksState>
 				loser: loser.id
 			},
 			{ withCredentials: true })
-			.then(response => {
-				console.log(response.data);
-				const left = new Code(response.data[0].fields.pk, response.data[0].fields.code, "asdf asdf", "Javascript");
-				const right = new Code(response.data[1].fields.pk, response.data[1].fields.code, "asdf asdf", "Javascript");
-				this.setState({leftCode: left, rightCode: right});
+			.then(() => {
+                return axios.get("http://localhost:8000/blocks");
 			})
+            .then(response => {
+                const left = new Code(response.data[0].fields.pk, response.data[0].fields.code, "asdf asdf", "Javascript");
+                const right = new Code(response.data[1].fields.pk, response.data[1].fields.code, "asdf asdf", "Javascript");
+                this.setState({leftCode: left, rightCode: right});
+            })
 			.catch(error => {
 				console.log(error);
 			});
