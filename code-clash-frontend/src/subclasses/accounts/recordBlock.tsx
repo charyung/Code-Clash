@@ -6,10 +6,8 @@ interface RecordBlockProps
     title: string;
     code: string;
     lang: string;
-    points: string;
-    date: string;
-    //points: number,
-    //date: Date
+    points: number;
+    date: Date;
 }
 
 interface RecordBlockState
@@ -28,12 +26,12 @@ class RecordBlock extends React.Component<RecordBlockProps, RecordBlockState>
         this.hideCode = this.hideCode.bind(this);
     }
 
-    showCode()
+    private showCode()
     {
         this.setState({codeVisible: true});
     }
 
-    hideCode()
+    private hideCode()
     {
         this.setState({codeVisible: false});
     }

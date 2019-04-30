@@ -64,7 +64,7 @@ class Blocks extends React.Component<any, BlocksState>
 	{
 		try
 		{
-			await axios.get("http://localhost:8000/blocks")
+			await axios.get("http://localhost:8000/blocks/get")
 				.then(response => {
 					console.log(response.data);
 					const left = new Code(response.data[0].pk, response.data[0].fields.code, "asdf asdf", "Javascript");
@@ -123,7 +123,7 @@ class Blocks extends React.Component<any, BlocksState>
 			},
 			{ withCredentials: true })
 			.then(() => {
-                return axios.get("http://localhost:8000/blocks");
+                return axios.get("http://localhost:8000/blocks/get");
 			})
             .then(response => {
                 const left = new Code(response.data[0].fields.pk, response.data[0].fields.code, "asdf asdf", "Javascript");

@@ -1,21 +1,29 @@
+# Django
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.urls import reverse
 from django.template import loader
 from django.core import serializers
+from django.conf import settings
+
+# Python
 import json
 
 from .models import BlockUtils, Block
 
 # Create your views here.
 def index(request):
+    # TODO: something about MEDIA_ROOT and something about MEDIA_URL
+    return HttpResponse(serializers.serialize('json', Block.objects.all()))
+    
+def get(request, block_id):
+    return HttpResponse(Block.objects.get(pk=block_id).code)
+
+def getTwoBlocks(request):
     choices = BlockUtils.getEntries()
     serialized_choices = serializers.serialize('json', choices)
     #return render(request, "blocks/index.html", context)
     return HttpResponse(serialized_choices, content_type='application/json')
-    
-def detail(request, block_id):
-    return HttpResponse(Block.objects.get(pk=block_id).code)
     
 def vote(request):
     try:

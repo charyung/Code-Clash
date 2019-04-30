@@ -8,10 +8,12 @@ class Block(models.Model):
     The name is perhaps misleading, but I couldn't think of a better one.
     This is a single piece of code submitted by a person.
     '''
-    voteCount = models.IntegerField()
-    winCount = models.IntegerField()
+    vote_count = models.IntegerField()
+    win_count = models.IntegerField()
     code = models.FileField()
-    winRate = models.FloatField()
+    win_rate = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
 # Create your models here.
 class BlockUtils():
@@ -25,7 +27,7 @@ class BlockUtils():
         blocksCount = Block.objects.count()
         firstBlock = Block.objects.get(pk=(random.randint(1, blocksCount)))
         
-        winRateThreshold = firstBlock.winRate
+        winRateThreshold = firstBlock.win_rate
         restrictedList = []
         winRateScope = 0
         
@@ -34,7 +36,7 @@ class BlockUtils():
             lowerWinRateBound = max(0, winRateThreshold - (0.05 * winRateScope))
             upperWinRateBound = min(1, winRateThreshold + (0.05 * winRateScope))
             
-            restrictedList = [row for row in Block.objects.filter(Q(winRate__lte=upperWinRateBound) | Q(winRate__gte=lowerWinRateBound)).order_by("voteCount")]
+            restrictedList = [row for row in Block.objects.filter(Q(win_rate__lte=upperWinRateBound) | Q(win_rate__gte=lowerWinRateBound)).order_by("vote_count")]
             
         firstRow = restrictedList[0]
         
@@ -83,5 +85,4 @@ class BlockUtils():
         (???) -> void
         '''
         for file in filesList:
-            block = Block.objects.create(0, 0, file, 0)
-            block.save()
+            block = Block.objects.create(vote_count=0, win_count=0, code=file, win_rate=0)
