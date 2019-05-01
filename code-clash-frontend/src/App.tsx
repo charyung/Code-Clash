@@ -1,40 +1,21 @@
 // React
 import * as React from 'react';
-import { BrowserRouter, Route } from "react-router-dom";
 
 // Models
 import Header from "./subclasses/header/header";
-import Blocks from "./subclasses/blocks/blocks";
-import RegistrationForm from "./subclasses/accounts/register/register";
-import SignInForm from "./subclasses/accounts/signIn/signIn";
-import Account from "./subclasses/accounts/account";
-import Upload from "./subclasses/accounts/upload/upload";
-import BlockView from "./subclasses/accounts/blockView/blockView";
 
 // Stylesheet
 import './stylesheets/App.css';
+import Router from "./subclasses/router";
+import {BrowserRouter} from "react-router-dom";
 
 const App = () => (
-	<BrowserRouter>
-		<div>
-			<Header/>
-
-			<Route exact path="/" component={Home} />
-			<Route path="/blocks" component={Blocks} />
-			<Route path="/register" component={RegistrationForm} />
-			<Route path="/signin" component={SignInForm} />
-			<Route path="/account" component={Account} />
-			<Route path="/upload" component={Upload} />
-			<Route path="/code/:id" component={BlockView}/>
-		</div>
-	</BrowserRouter>
-);
-
-
-const Home = () => (
-	<div>
-		<h2>Home</h2>
-	</div>
+		<BrowserRouter>
+			<div>
+				<Header/>
+				<Router/>
+			</div>
+		</BrowserRouter>
 );
 /*const About = () => (
 	<div>
