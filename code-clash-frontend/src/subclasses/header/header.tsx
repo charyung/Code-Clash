@@ -1,6 +1,7 @@
 // React
 import * as React from "react";
-import {BrowserRouter, Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+
 // Style
 import './header.css';
 

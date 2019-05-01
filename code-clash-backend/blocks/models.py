@@ -27,14 +27,14 @@ class BlockUtils():
         blocksCount = Block.objects.count()
         firstBlock = Block.objects.get(pk=(random.randint(1, blocksCount)))
         
-        win_rateThreshold = firstBlock.win_rate
+        winRateThreshold = firstBlock.win_rate
         restrictedList = []
-        win_rateScope = 0
+        winRateScope = 0
         
         while (len(restrictedList) < 2):
-            win_rateScope += 1
-            lowerWinRateBound = max(0, win_rateThreshold - (0.05 * win_rateScope))
-            upperWinRateBound = min(1, win_rateThreshold + (0.05 * win_rateScope))
+            winRateScope += 1
+            lowerWinRateBound = max(0, winRateThreshold - (0.05 * winRateScope))
+            upperWinRateBound = min(1, winRateThreshold + (0.05 * winRateScope))
             
             restrictedList = [row for row in Block.objects.filter(Q(win_rate__lte=upperWinRateBound) | Q(win_rate__gte=lowerWinRateBound)).order_by("vote_count")]
             
