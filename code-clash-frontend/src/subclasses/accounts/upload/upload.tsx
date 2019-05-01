@@ -24,7 +24,7 @@ import FileListDisplay from './fileListDisplay';
 
 interface UploadState
 {
-	fileList?: FileList,
+	fileList?: FileList | null,
 	codeText: string;
 }
 
@@ -77,7 +77,7 @@ class Upload extends React.Component<any, UploadState>
 
 	upload()
 	{
-		if (this.state.fileList)
+		if (this.fileField.current && this.state.fileList)
 		{
 			// should probably limit file size
 			//const fr = new FileReader();
@@ -106,6 +106,9 @@ class Upload extends React.Component<any, UploadState>
 				.catch(error => {
 					console.log(error);
 				});
+
+			this.fileField.current.value = "";
+			this.setState({fileList: null});
 		}
 
 
