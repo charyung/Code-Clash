@@ -126,8 +126,8 @@ class Blocks extends React.Component<any, BlocksState>
                 return axios.get("http://localhost:8000/blocks/get");
 			})
             .then(response => {
-                const left = new Code(response.data[0].fields.pk, response.data[0].fields.code, "asdf asdf", "Javascript");
-                const right = new Code(response.data[1].fields.pk, response.data[1].fields.code, "asdf asdf", "Javascript");
+                const left = new Code(response.data[0].pk, response.data[0].fields.code, "asdf asdf", "Javascript");
+                const right = new Code(response.data[1].pk, response.data[1].fields.code, "asdf asdf", "Javascript");
                 this.setState({leftCode: left, rightCode: right});
             })
 			.catch(error => {

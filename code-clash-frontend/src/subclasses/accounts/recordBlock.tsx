@@ -1,8 +1,9 @@
 import * as React from "react";
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import { Link } from "react-router-dom";
 
 interface RecordBlockProps
 {
+    id: number;
     title: string;
     code: string;
     lang: string;
@@ -40,9 +41,8 @@ class RecordBlock extends React.Component<RecordBlockProps, RecordBlockState>
     {
         return (
             <div className="code-record">
-                <a className="title"> {this.props.title} </a>
-                <div className="desc"> {this.state.codeVisible ? <span className="toggle-code" onClick={this.hideCode}>Hide code</span> : <span className="toggle-code" onClick={this.showCode}>Show code</span> } | {this.props.lang} | {this.props.points} points | Posted on {this.props.date} </div>
-                {this.state.codeVisible ? <pre className="codeBlock"><code><SyntaxHighlighter showLineNumbers language="javascript">{this.props.code}</SyntaxHighlighter></code></pre> : null}
+                <div className="title"> {this.props.title} </div>
+                <div className="desc"> <Link to={"code/" + this.props.id}>Show Details</Link> | {this.props.lang} | {this.props.points} points | Posted on {this.props.date} </div>
             </div>
         )
     }

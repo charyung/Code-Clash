@@ -17,7 +17,7 @@ def index(request):
     return HttpResponse(serializers.serialize('json', Block.objects.all()))
     
 def get(request, block_id):
-    return HttpResponse(Block.objects.get(pk=block_id).code)
+    return HttpResponse(serializers.serialize('json', [Block.objects.get(pk=block_id)]))
 
 def getTwoBlocks(request):
     choices = BlockUtils.getEntries()

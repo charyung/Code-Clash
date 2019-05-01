@@ -1,15 +1,21 @@
+// React
 import * as React from 'react';
-import './account.css';
+import axios from "axios";
 
 // Models
 import RecordBlock from './recordBlock';
-import axios from "axios";
+
+// Stylesheet
+import './account.css';
 
 interface BlockType
 {
-    code: string;
-    vote_count: number;
-    created_at: Date;
+	pk: number;
+	fields: {
+		code: string;
+		vote_count: number;
+		created_at: Date;
+	}
 }
 
 type AccountState = {
@@ -46,7 +52,7 @@ class Account extends React.Component<any, AccountState>
 		}
 	}
 
-	private generateRecords(data: any): void
+	private generateRecords(data: Array<BlockType>): void
 	{
 	    //TODO: this is fucking horrible, please change when this goes into prod
 	    const fileLocation = "C:/Users/CY/Documents/GitHub/Code-Clash/code-clash-backend/uploaded_files";
@@ -60,10 +66,10 @@ class Account extends React.Component<any, AccountState>
 		//fr.onload = ((a) => console.log(a));
 		//fr.readAsText(fileLocation + data[2].code);
 
-		/*data.forEach((block) => {
-			const record = <RecordBlock title={block.fields.code} code={block.fields.code} lang="Python" points={block.fields.vote_count} date={block.fields.created_at}/>;
+		data.forEach((block) => {
+			const record = <RecordBlock key={block.fields.code} id={block.pk} title={block.fields.code} code={block.fields.code} lang="Python" points={block.fields.vote_count} date={block.fields.created_at}/>;
 			records.push(record);
-		});*/
+		});
 
 		this.setState({records: records})
 	}

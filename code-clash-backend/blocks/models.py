@@ -22,19 +22,19 @@ class BlockUtils():
         This function gets the 2 entries to compare and returns them.
         '''
 
-        #First, we generate a winrate threshold (number between 0 to 1, inclusive on both ends). Then, we sort by voteCount, getting the rows with the condition that its winrate is within 5% of the generated number. We take the row with the lowest voteCount that in this result. Then we randomly get one from the same restricted table and show the user the two to compare.
+        #First, we generate a winrate threshold (number between 0 to 1, inclusive on both ends). Then, we sort by vote_count, getting the rows with the condition that its winrate is within 5% of the generated number. We take the row with the lowest vote_count that in this result. Then we randomly get one from the same restricted table and show the user the two to compare.
         
         blocksCount = Block.objects.count()
         firstBlock = Block.objects.get(pk=(random.randint(1, blocksCount)))
         
-        winRateThreshold = firstBlock.win_rate
+        win_rateThreshold = firstBlock.win_rate
         restrictedList = []
-        winRateScope = 0
+        win_rateScope = 0
         
         while (len(restrictedList) < 2):
-            winRateScope += 1
-            lowerWinRateBound = max(0, winRateThreshold - (0.05 * winRateScope))
-            upperWinRateBound = min(1, winRateThreshold + (0.05 * winRateScope))
+            win_rateScope += 1
+            lowerWinRateBound = max(0, win_rateThreshold - (0.05 * win_rateScope))
+            upperWinRateBound = min(1, win_rateThreshold + (0.05 * win_rateScope))
             
             restrictedList = [row for row in Block.objects.filter(Q(win_rate__lte=upperWinRateBound) | Q(win_rate__gte=lowerWinRateBound)).order_by("vote_count")]
             
@@ -54,14 +54,14 @@ class BlockUtils():
         w = Block.objects.get(pk=winningRow)
         l = Block.objects.get(pk=losingRow)
         
-        w.voteCount += 1
-        w.winCount += 1
-        w.winRate = w.winCount / w.voteCount
+        w.vote_count += 1
+        w.win_count += 1
+        w.win_rate = w.win_count / w.vote_count
         
-        l.voteCount += 1
-        l.winRate = l.winCount / l.voteCount
+        l.vote_count += 1
+        l.win_rate = l.win_count / l.vote_count
 		
-        print(w.winRate)
+        print(w.win_rate)
         
         w.save()
         l.save()
