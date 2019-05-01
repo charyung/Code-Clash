@@ -1,0 +1,9 @@
+@import '../../../stylesheets/colours.scss';
+@import '../../../stylesheets/utilities.scss';;
+
+.block-view
+{
+  @include form-style();
+
+  width: 70%;
+}

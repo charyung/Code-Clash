@@ -1,6 +1,11 @@
 // React
 import * as React from 'react';
 
+// Axios
+import axios from 'axios';
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
+
 // CSS
 import './upload.css';
 
@@ -23,6 +28,8 @@ interface UploadState
 	codeText: string;
 }
 
+// The object that's passed to backend
+
 class Upload extends React.Component<any, UploadState>
 {
 	private readonly fileField = React.createRef<HTMLInputElement>();
@@ -36,7 +43,8 @@ class Upload extends React.Component<any, UploadState>
 		this.state = {codeText: ""};
 
 		this.change = this.change.bind(this);
-		this.resetField = this.resetField.bind(this);
+		//this.readMultipleFiles = this.readMultipleFiles.bind(this);
+		this.upload = this.upload.bind(this);
 
 		this.fileField = React.createRef();
 		this.titleField = React.createRef();
@@ -49,12 +57,62 @@ class Upload extends React.Component<any, UploadState>
 		this.setState({fileList: files});
 	}
 
-	resetField()
+	/*readMultipleFiles(index: number, fr: FileReader)
 	{
-		if (this.fileField.current)
+		const files = this.state.fileList;
+		if (files)
+		{
+			fr.readAsArrayBuffer(files[index]);
+
+			fr.onload = () => {
+				console.log(fr.result);
+
+				if (index < (files.length - 1))
+				{
+					this.readMultipleFiles(index + 1, fr);
+				}
+			};
+		}
+	}*/
+
+	upload()
+	{
+		if (this.state.fileList)
+		{
+			// should probably limit file size
+			//const fr = new FileReader();
+
+			//this.readMultipleFiles(0, fr);
+			const uploadList = new FormData();
+
+			Array.from(this.state.fileList).forEach((file) => {
+				uploadList.append("files", file);
+			});
+
+			console.log(Array.from(uploadList.values()));
+
+			axios.post("http://localhost:8000/blocks/create",
+				uploadList,
+				{
+					withCredentials: true,
+					headers: {
+						'Content-Type': 'multipart/form-data'
+					}
+				},
+				)
+				.then(response => {
+					console.log(response.data);
+				})
+				.catch(error => {
+					console.log(error);
+				});
+		}
+
+
+		/*if (this.fileField.current)
 		{
 			this.fileField.current.value = "";
-		}
+		}*/
 	}
 
 	render()
@@ -66,11 +124,13 @@ class Upload extends React.Component<any, UploadState>
 						<col span={1} style={{width: "70%"}}/>
 						<col span={1} style={{width: "30%"}}/>
 					</colgroup>
-					<tr>
-						<th>File Name</th>
-						<th>Language</th>
-					</tr>
-					{ this.state.fileList ? <FileListDisplay filesArray={this.state.fileList}/> : null }
+					<tbody>
+						<tr>
+							<th>File Name</th>
+							<th>Language</th>
+						</tr>
+						{ this.state.fileList ? <FileListDisplay filesArray={this.state.fileList}/> : null }
+					</tbody>
 				</table>
 				<div className="upload-block">
 					<pre className="prettyprint"><code>{this.state.codeText}</code></pre>
@@ -78,7 +138,7 @@ class Upload extends React.Component<any, UploadState>
 
 				<div>
 					<input type="file" ref={this.fileField} onChange={(e) => this.change(e.target.files as FileList)} multiple/>
-					<button onClick={this.resetField}> Upload </button>
+					<button onClick={this.upload}> Upload </button>
 				</div>
 			</div>
 		)

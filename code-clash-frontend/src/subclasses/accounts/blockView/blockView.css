@@ -1,0 +1,10 @@
+.block-view {
+  color: white;
+  background-color: #333130;
+  margin: 0 auto;
+  padding: 1em;
+  box-shadow: 0.5em 0.5em rgba(0, 0, 0, 0.25);
+  width: 70%;
+}
+
+/*# sourceMappingURL=blockView.css.map */

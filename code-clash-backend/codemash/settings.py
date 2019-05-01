@@ -165,3 +165,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Media root, specifies where saved files are stored (for now)
+MEDIA_ROOT = 'uploaded_files/'

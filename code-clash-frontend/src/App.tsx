@@ -1,12 +1,22 @@
+// React
 import * as React from 'react';
+
+// Models
 import Header from "./subclasses/header/header";
 
+// Stylesheet
 import './stylesheets/App.css';
+import Router from "./subclasses/router";
+import { BrowserRouter } from "react-router-dom";
 
 const App = () => (
-	<Header></Header>
+	<BrowserRouter>
+		<div>
+			<Header/>
+			<Router/>
+		</div>
+	</BrowserRouter>
 );
-
 /*const About = () => (
 	<div>
 		<div className="headerWrapper">

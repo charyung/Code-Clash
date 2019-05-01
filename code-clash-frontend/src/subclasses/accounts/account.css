@@ -1,0 +1,33 @@
+.account-info, .code-record {
+  color: white;
+  background-color: #333130;
+  margin: 0 auto;
+  padding: 1em;
+  box-shadow: 0.5em 0.5em rgba(0, 0, 0, 0.25);
+  margin: 1em;
+  width: 70%;
+}
+
+.code-record {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.code-record .codeBlock {
+  font-size: 10pt;
+  padding: 0.5em;
+  width: 90%;
+  height: 80%;
+  overflow: auto;
+}
+.code-record .title {
+  font-weight: bold;
+}
+.code-record .desc {
+  color: grey;
+}
+.code-record .desc .toggle-code {
+  color: white;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=account.css.map */
